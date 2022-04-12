@@ -28,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
                 intent.putExtra("pwd",binding.signUpPwdText.text.toString())
                 setResult(RESULT_OK, intent)
 
-                this.finish() // 액티비티 종료 , SignINActivity 로 이동
+                finish() // 액티비티 종료 , SignINActivity 로 이동
             }
 
         }

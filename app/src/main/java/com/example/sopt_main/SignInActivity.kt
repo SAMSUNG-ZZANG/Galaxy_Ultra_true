@@ -19,8 +19,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lateinit var resultLauncher: ActivityResultLauncher<Intent>
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == Activity.RESULT_OK){
                 val id = result.data?.getStringExtra("id")

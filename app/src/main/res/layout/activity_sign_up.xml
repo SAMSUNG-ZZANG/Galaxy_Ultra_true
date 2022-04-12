@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/signUp_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -19,7 +20,7 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/signUp_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -28,10 +29,10 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_logo"/>
 
     <EditText
-        android:id="@+id/nameText"
+        android:id="@+id/signUp_editName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -40,11 +41,11 @@
         android:hint="이름을 입력해주세요."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_name" />
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/signUp_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -53,10 +54,10 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_editName" />
 
     <EditText
-        android:id="@+id/SignUpIdText"
+        android:id="@+id/signUp_editId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -65,10 +66,10 @@
         android:hint="아이디를 입력해주세요."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_id" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/signUp_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -77,10 +78,10 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpIdText" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_editId" />
 
     <EditText
-        android:id="@+id/signUpPwdText"
+        android:id="@+id/signUp_editPwd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -90,10 +91,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_pwd" />
 
     <Button
-        android:id="@+id/SignUpSet"
+        android:id="@+id/signUp_setBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -103,5 +104,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpPwdText" />
+        app:layout_constraintTop_toBottomOf="@+id/signUp_editPwd" />
 </androidx.constraintlayout.widget.ConstraintLayout>
