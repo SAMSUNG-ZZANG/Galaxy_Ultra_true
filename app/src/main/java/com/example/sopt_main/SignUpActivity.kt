@@ -15,17 +15,17 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.SignUpSet.setOnClickListener {
+        binding.signUpSetBtn.setOnClickListener {
 
-            if(binding.nameText.text.isNullOrBlank() || binding.SignUpIdText.text.isNullOrBlank() || binding.signUpPwdText.text.isNullOrBlank())  // 셋중 하나라도 비어있다면
+            if(binding.signUpEditName.text.isNullOrBlank() || binding.signUpEditId.text.isNullOrBlank() || binding.signUpEditPwd.text.isNullOrBlank())  // 셋중 하나라도 비어있다면
             {
                 Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
             }
             else
             {
                 val intent = Intent(this, SignInActivity::class.java)
-                intent.putExtra("id",binding.SignUpIdText.text.toString())
-                intent.putExtra("pwd",binding.signUpPwdText.text.toString())
+                intent.putExtra("id",binding.signUpEditId.text.toString())
+                intent.putExtra("pwd",binding.signUpEditPwd.text.toString())
                 setResult(RESULT_OK, intent)
 
                 finish() // 액티비티 종료 , SignINActivity 로 이동

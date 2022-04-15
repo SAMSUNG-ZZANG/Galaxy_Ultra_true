@@ -24,14 +24,14 @@ class SignInActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK){
                 val id = result.data?.getStringExtra("id")
                 val password = result.data?.getStringExtra("pwd")
-                binding.idText.setText(id)
-                binding.pwdText.setText(password)
+                binding.mainEditId.setText(id)
+                binding.mainEditPwd.setText(password)
             }
         }
-        binding.login.setOnClickListener {
+        binding.mainLoginBtn.setOnClickListener {
             //Toast.makeText(this,"안녕하세요. 진실님",Toast.LENGTH_SHORT).show()
 
-            if(binding.idText.text.isNullOrBlank() || binding.pwdText.text.isNullOrBlank())  //둘 중 하나라도 비어있다면
+            if(binding.mainEditId.text.isNullOrBlank() || binding.mainEditPwd.text.isNullOrBlank())  //둘 중 하나라도 비어있다면
             {
                 Toast.makeText(this,"아이디/비밀번호를 확인해주세요",Toast.LENGTH_SHORT).show()
             }
@@ -41,7 +41,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        binding.signUp.setOnClickListener {
+        binding.mainSignUpBtn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
