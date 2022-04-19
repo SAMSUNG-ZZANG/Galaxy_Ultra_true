@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
@@ -60,32 +59,37 @@
                 android:layout_width="150dp"
                 android:layout_height="65dp"
                 android:layout_marginTop="15dp"
-                android:text="팔로워 목록"
-                app:layout_constraintHorizontal_chainStyle="packed"
                 android:layout_marginRight="20dp"
+                android:text="팔로워 목록"
                 app:layout_constraintEnd_toStartOf="@+id/home_repoBtn"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_MBTI" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/home_repoBtn"
                 android:layout_width="150dp"
+                android:layout_height="65dp"
                 android:layout_marginTop="15dp"
                 android:text="레포지토리 목록"
-                android:layout_height="65dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/home_followerBtn"
                 app:layout_constraintTop_toBottomOf="@id/home_MBTI" />
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_repoBtn"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/home_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_repoBtn" />
-
-
+                app:layout_constraintTop_toBottomOf="parent" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

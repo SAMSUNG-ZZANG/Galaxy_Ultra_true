@@ -20,16 +20,16 @@ class FollowerFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFollowerBinding.inflate(layoutInflater,container,false)
-        return binding.root
 
         initFollowerAdaptor()
+        return binding.root
     }
 
     private fun initFollowerAdaptor(){
         followerAdapter = FollowerAdapter()
         _binding?.rvFollower?.adapter = followerAdapter
 
-        followerAdapter.userList.addAll(
+        followerAdapter.followerList.addAll(
                 listOf(
                         FollowerData("이강민", "안드로이드 파트장"),
                         FollowerData("이강민", "안드로이드 파트장"),
