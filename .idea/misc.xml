@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/round_btn.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/round_list.xml" value="0.157" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/follower_list.xml" value="0.12604166666666666" />
+        <entry key="app/src/main/res/layout/follower_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_repository.xml" value="0.12604166666666666" />
-        <entry key="app/src/main/res/layout/repository_list.xml" value="0.47350107828776045" />
+        <entry key="app/src/main/res/layout/fragment_repository.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/repository_list.xml" value="0.1" />
       </map>
     </option>
   </component>

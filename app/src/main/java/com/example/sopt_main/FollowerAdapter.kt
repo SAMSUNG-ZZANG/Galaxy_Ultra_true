@@ -29,4 +29,5 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
         }
 
     }
+
 }

@@ -21,6 +21,10 @@ class RepositoryFragment : Fragment() {
         _binding = FragmentRepositoryBinding.inflate(layoutInflater,container,false)
 
         initFollowerAdaptor()
+
+        binding.rvFollower.addItemDecoration(VerticalItemDecorator(20))
+        binding.rvFollower.addItemDecoration(HorizontalItemDecorator(20))
+
         return binding.root
     }
 
@@ -30,7 +34,7 @@ class RepositoryFragment : Fragment() {
 
         repoAdaptor.repoList.addAll(
             listOf(
-                RepositoryData("안드로이드 과제 레포지토리", "안드로이드 파트 과제"),
+                RepositoryData("안드로이드 과제 레포지토리이구요,,안드로이드 과제 레포지토리 입니다아아아아아", "안드로이드 파트 과제 중 입니다~!~!~! 과제 중중 과제 하는 중중"),
                 RepositoryData("ios 과제 레포지토리", "ios 파트 과제"),
                 RepositoryData("서버 과제 레포지토리", "서버 파트 과제"),
                 RepositoryData("기획 과제 레포지토리", "기획 파트 과제")

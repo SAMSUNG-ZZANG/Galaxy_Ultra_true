@@ -4,15 +4,18 @@
     xmlns:tools ="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/round_list"
     android:paddingVertical="10dp">
 
     <TextView
         android:id="@+id/repoList_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
         tools:text="안드로이드 과제 레포지토리"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,14 +23,16 @@
 
     <TextView
         android:id="@+id/repoList_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         tools:text="안드로이드 과제"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="10sp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/repoList_title"
         app:layout_constraintTop_toBottomOf="@id/repoList_title" />
 
 
