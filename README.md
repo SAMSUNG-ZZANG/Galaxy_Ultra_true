@@ -89,3 +89,10 @@
 
 - corner속성으로 radius 를 조절하여 둥근 모서리 만들기
 - stroke 속성으로 테두리 두께와 색 설정하기
+
+
+---
+# 실행화면 영상
+https://user-images.githubusercontent.com/97952129/164733263-20f4388e-2ec1-44b9-8c82-6283b78afc3d.mov
+---
+
