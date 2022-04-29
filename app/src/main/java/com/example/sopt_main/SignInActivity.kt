@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.sopt_main.databinding.ActivityMainBinding
 
 class SignInActivity : AppCompatActivity() {
@@ -45,7 +46,15 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
+        initImage()
 
+    }
+
+    private  fun initImage(){
+        Glide.with(this)
+            .load(R.drawable.selfie_true)
+            .circleCrop()
+            .into(binding.mainImage)
 
     }
 

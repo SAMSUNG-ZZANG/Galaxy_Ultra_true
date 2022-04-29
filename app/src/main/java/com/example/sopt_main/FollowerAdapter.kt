@@ -3,6 +3,7 @@ package com.example.sopt_main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.sopt_main.databinding.FollowerListBinding
 
 class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(){
@@ -26,8 +27,15 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
         fun onBind(data: FollowerData){
             binding.followerName.text = data.name
             binding.followerIntroduce.text = data.introduction
-        }
+            Glide.with(binding.root)
+                .load(R.drawable.selfie_true)
+                .circleCrop()
+                .into(binding.followerProfile)
+
+            }
 
     }
+
+
 
 }

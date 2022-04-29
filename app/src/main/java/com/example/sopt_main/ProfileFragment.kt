@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.sopt_main.databinding.FragmentProfileBinding
 
 
@@ -24,7 +25,7 @@ class ProfileFragment : Fragment() {
 
 
         transactionFragment()
-
+        initImage()
 
         return binding.root
     }
@@ -35,24 +36,32 @@ class ProfileFragment : Fragment() {
         val fragment1 =FollowerFragment()
         val fragment2 =RepositoryFragment()
 
-        parentFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
+        childFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
 
         binding.homeFollowerBtn.setOnClickListener{
             val transaction = childFragmentManager.beginTransaction()
-
+            binding.homeFollowerBtn.isSelected =true
+            binding.homeRepoBtn.isSelected =false
             transaction.replace(R.id.profile_fragment,fragment1)
             transaction.commit()
         }
 
         binding.homeRepoBtn.setOnClickListener{
-            val transaction = parentFragmentManager.beginTransaction()
-
+            val transaction = childFragmentManager.beginTransaction()
+            binding.homeRepoBtn.isSelected =true
+            binding.homeFollowerBtn.isSelected =false
             transaction.replace(R.id.profile_fragment,fragment2)
             transaction.commit()
         }
     }
 
+    private  fun initImage(){
+        Glide.with(this)
+            .load(R.drawable.selfie_true)
+            .circleCrop()
+            .into(binding.imageView)
 
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
