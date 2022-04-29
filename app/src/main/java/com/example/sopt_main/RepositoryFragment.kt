@@ -20,6 +20,11 @@ class RepositoryFragment : Fragment() {
     ): View?{
         _binding = FragmentRepositoryBinding.inflate(layoutInflater,container,false)
 
+        binding.rvFollower.setOnClickListener {
+            repoAdaptor
+        }
+
+
         initFollowerAdaptor()
 
         binding.rvFollower.addItemDecoration(VerticalItemDecorator(20))

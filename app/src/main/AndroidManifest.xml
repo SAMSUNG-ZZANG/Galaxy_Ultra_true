@@ -10,16 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sopt_main">
         <activity
+            android:name=".seminarMain"
+            android:exported="false" />
+
+
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity">
+
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignInActivity" />
     </application>
 
