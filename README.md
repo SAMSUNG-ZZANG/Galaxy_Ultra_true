@@ -1,73 +1,330 @@
-# SignInActivity
-
- 
-
-### 회원가입 화면에서 입력했던 아이디와 비밀번호를 받아오기 (성장과제)
-![Untitled](https://user-images.githubusercontent.com/97952129/162616058-57847fb4-1193-49a0-8be9-482f1d84f8c2.png)
-
-
-- registerForActivityResult() 를 선언한 변수 resultLauncher 에 담는다.
-- registerForActivityResult() 는 인자로 StartActicityForResult() 를 받는다.
-- if 문을 통해 result 객체의 resultcode  를 확인한다.
-- result의 intent로 부터 getStringExtra로 원하던 아이디와 비밀번호를 받아온다.
-- 로그인 화면의 idText 와 pwdText 를 setText()로 받아온 id 와 pwd 의 데이터를 보여준다.
-
-### EditText에 아이디, 비밀번호 중 하나라도 비어있으면 토스트 메세지 출력
-![Untitled (2)](https://user-images.githubusercontent.com/97952129/162616187-b8d434e3-8a53-4178-9b6f-7df6569f9668.png)
-
-
-- binding에서 받아온 idText의 text 가 널값일 경우를 isNullOrBlank()를 통해 확인하였다.
-- 둘 중에 하나라도 비어있을 경우 아이디 비밀번호를 확인해달라는 토스트 메세지를 띄웠고
-
-그렇지 않을 경우 로그인 성공 토스트 메세지를 띄운다.
-
-→ 처음에는 if 문에서 binding.idText.text = “” 이렇게 작성했었는데 idText 자체가 String 타입이 아니라는 오류가 발생해서  isNullOrBlank() 를 사용하였다. 
-
-### Activity를 intent 를  통해 넘어오기
-![Untitled (3)](https://user-images.githubusercontent.com/97952129/162616206-d3b655c1-2d7a-43b4-a8d7-e1a15e900882.png)
-
-
-
-- intent 를 활용하여 SignUpActivity 에서 아이디와 비밀번호의 입력 데이터를  받은 Activity를 반환하여 보여준다.
-
-→ 결과값을 받은 resultLauncher 로 변경해주지 않고 기존의 SignInActivity로 돌아와서 어려움을 겪었었다...
-
-# SignUpActivity
-
-### 회원가입 버튼을 눌렀을 경우
-
-![Untitled (4)](https://user-images.githubusercontent.com/97952129/162616232-8737fe14-b4b1-499e-aeda-e1dee50b27b6.png)
-
-
-
-- 이름, 아이디, 비밀번호 중 하나라도 비어있다면 토스트메세지를 출력한다.
-- 전부 다 입력되었다면 intent 를 활용하여 id와 pwd 값을 저장한다.
-- finish() 함수를 사용하여 Activity 종료한다.
-
-→ stack 처럼 쌓여있어서 바로 전에 있던 SignInActivity 로 넘어간다.
-
-# activity_main_xml 와 activity_sign_up_xml
-![Untitled (5)](https://user-images.githubusercontent.com/97952129/162616249-8076aaec-b98b-41c5-a2a7-a58337a1e0c7.png)
-
-
-- hint 속성을 사용하여 미리보기 글씨를 나타내었다.
-- inputType 속성을 사용하였고 “textPassword” 로 입력내용을 가렸다.
-
+# Seminar03
 
 ---
 
-https://user-images.githubusercontent.com/97952129/162616272-1c7f6851-d7ab-4963-be4b-e53fe579f344.mp4
+# ✔️BottomNavigation
 
+---
 
-# activity_home_xml
-![Untitled (6)](https://user-images.githubusercontent.com/97952129/162616300-631aabd9-e334-4379-b968-6ab6b330ef16.png)
+## TestViewPagerAdapter.kt
 
+```
+package com.example.sopt_main
 
-- ScrollView를 구현하기 위해 전체 레이아웃을 ConstraintLayout 으로 설정하고 ScrollView 안에 ConstraintLayout 을 구현해주었다.
-- src 속성을 사용하여 사진을 넣어주었다.
-- constraintDimensionRatio 속성을 사용하여 사진의 비율을 1:1 로 맞춰준다.
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
+class TestViewPagerAdaptor(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity){
+        val fragments =mutableListOf<Fragment>()
 
-https://user-images.githubusercontent.com/97952129/162616326-085dce5f-d0ed-4a54-a75c-cbc8d9e8b514.mp4
+        override fun getItemCount() : Int = fragments.size
 
+        override fun createFragment(position: Int) : Fragment = fragments[position]
+    }
 
+```
+
+- FragmentStateAdapter 상속받기
+- getItemCount() : 어댑터가 갖고 있는 아이템 수를 반환하는 메소드
+- createFragment() : 연결되어 있는 Fragment 를 제공해주는 메소드
+
+---
+
+## HomeActivity.kt
+
+```
+private fun initAdaptor(){
+    val fragmentList =listOf(ProfileFragment(),HomeFragment(),TestFragment3())
+    testViewPagerAdaptor = TestViewPagerAdaptor(this)
+    testViewPagerAdaptor.fragments.addAll(fragmentList)
+
+    homeBinding.homeVp.adapter= testViewPagerAdaptor
+}
+```
+
+- 만들어준 TestViewPagerAdapter 와 연동해주기
+
+```
+private fun initBottomNavi(){
+    homeBinding.homeVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        override fun onPageSelected(position: Int) {
+            homeBinding.homeBnv.menu.getItem(position).isChecked= true
+        }
+    })
+
+    homeBinding.homeBnv.setOnItemSelectedListener{
+when(it.itemId){
+            R.id.menu_android-> {
+                homeBinding.homeVp.currentItem= FIRST_FRAGMENT
+                return@setOnItemSelectedListener true
+            }
+            R.id.menu_list-> {
+                homeBinding.homeVp.currentItem= SECOND_FRAGMENT
+                return@setOnItemSelectedListener true
+            }
+            else -> {
+                homeBinding.homeVp.currentItem= THIRD_FRAGMENT
+                return@setOnItemSelectedListener true
+            }
+        }
+
+}
+}
+
+companion object{
+    const val FIRST_FRAGMENT = 0
+    const val SECOND_FRAGMENT = 1
+    const val THIRD_FRAGMENT = 2
+
+}
+```
+
+- bottomNavigation 과 viewPager2 를 연동해주는 함수
+- 특정 버튼을 눌렀을 때 isChecked() 를 활용하여 체크되어 있는지 확인
+- 현재 어떤 아이템이 눌렸는지에 따라 화면을 전환해주는 setOnItemSelectedListener
+
+---
+
+## activity_home.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/home_bnv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/home_bnv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconTint="@color/select_bottom_navi"
+        app:itemRippleColor="#6424D5"
+        app:itemTextColor="@color/select_bottom_navi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_sample"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+- 전환하는 화면들을 담을 viewPager2 와 하단에 bottomNavigation 설정
+- 선택했을 때와 선택되지 않았을 때의 색상을 지정
+- menu 를 불러와서 적용
+
+---
+
+## menu_sample.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_android"
+        android:icon="@drawable/profile"
+        android:title="프로필" />
+    <item
+        android:id="@+id/menu_list"
+        android:icon="@drawable/home"
+        android:title="홈"/>
+    <item
+        android:id="@+id/menu_setting"
+        android:icon="@drawable/camera"
+        android:title="카메라"/>
+</menu>
+```
+
+- bottomNavigation에 들어갈 3개의 메뉴 설정하기
+
+---
+
+# ✔️TabLayout
+
+---
+
+## fragment_home.xml
+
+```
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/home_tap"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/home_name"
+    app:tabIndicatorColor="@color/purple_200"/>
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintTop_toBottomOf="@+id/home_tap"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="156dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tap" />
+
+</androidx.core.widget.NestedScrollView>
+
+```
+
+- tapLayout 과 연동시켜줄 viewPager2
+- 중첩스크롤을 막기위한 NestedScrollView 설정
+
+---
+
+## TabViewPagerAdapter.kt
+
+```
+package com.example.sopt_main
+
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+
+class TabViewPagerAdaptor(fragment: Fragment):
+    FragmentStateAdapter(fragment){
+    val fragments =mutableListOf<Fragment>()
+
+    override fun getItemCount(): Int = fragments.size
+
+    override fun createFragment(position: Int): Fragment = fragments[position]
+
+}
+```
+
+- FragmentStateAdapter를 상속받는 어댑터
+- getItemCount(): 만들어진 개수 만큼 반환하는 메소드
+- createFragment() : 연결되어 있는 프래그먼트를 제공해주는 메소드
+
+---
+
+## HomeFragment.kt
+
+```
+private fun initAdaptor(){
+    val fragmentList =listOf(TabFollowerFragment(),TabFollowingFragment())
+
+    tabViewPagerAdaptor = TabViewPagerAdaptor(this)
+    tabViewPagerAdaptor.fragments.addAll(fragmentList)
+
+    binding.homeVp.adapter= tabViewPagerAdaptor
+}
+
+private fun initTabLayout(){
+    val tabLabel =listOf("팔로우","팔로워")
+
+    TabLayoutMediator(binding.homeTap, binding.homeVp){tab, position->
+tab.text= tabLabel[position]
+}.attach()
+}
+
+```
+
+- initAdapter() : 어댑터와 연결
+- initTabLayout() : 페이지 개수 만큼 탭을 생성, attach()를 호출할 때마다 기존 탭 지우고 새로운 탭 생성
+
+---
+
+# ✔️이미지 원형 표시하기
+
+```
+private  fun initImage(){
+    Glide.with(this)
+        .load(R.drawable.selfie_true)
+        .circleCrop()
+        .into(binding.imageView)
+
+}
+```
+
+- Glide 속성 중 circleCrop() 활용하여 사진을 원형으로 보이게 함
+
+---
+
+# ✔️Selector
+
+![스크린샷 2022-05-06 오후 8.52.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dcbead79-b86e-4bee-8e66-b65b2b93137c/스크린샷_2022-05-06_오후_8.52.46.png)
+
+## select_btn.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/round_btn" android:state_selected="true" />
+    <item android:drawable="@drawable/btn_not_seleted" android:state_selected="false" />
+</selector>
+```
+
+- state_selected 속성을 활용하여 버튼 누를 때와 누르지 않았을 때의 버튼 모양을 다르게 설정
+- 버튼 background 에 적용할 drawble 파일
+
+---
+
+## ProfileFragment.kt
+
+```
+private fun transactionFragment(){
+
+    val fragment1 =FollowerFragment()
+    val fragment2 =RepositoryFragment()
+
+childFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
+
+    binding.homeFollowerBtn.setOnClickListener{
+val transaction =childFragmentManager.beginTransaction()
+        binding.homeFollowerBtn.isSelected=true
+        binding.homeRepoBtn.isSelected=false
+        transaction.replace(R.id.profile_fragment,fragment1)
+        transaction.commit()
+}
+
+binding.homeRepoBtn.setOnClickListener{
+val transaction =childFragmentManager.beginTransaction()
+        binding.homeRepoBtn.isSelected=true
+        binding.homeFollowerBtn.isSelected=false
+        transaction.replace(R.id.profile_fragment,fragment2)
+        transaction.commit()
+}
+}
+```
+
+```
+
+override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+): View? {
+    _binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
+
+    binding.homeFollowerBtn.isSelected=true
+    binding.homeRepoBtn.isSelected=false
+    transactionFragment()
+    initImage()
+
+    return binding.root
+}
+```
+
+- setOnClickListener() 함수 안에 isSelected() 값을  true 또는 false  로 설정하여 버튼의 색상이 바뀌도록 설정
+
+---
+
+# ✔️실행영상
