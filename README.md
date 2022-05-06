@@ -261,7 +261,7 @@ private  fun initImage(){
 
 # ✔️Selector
 
-![스크린샷 2022-05-06 오후 8.52.46.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dcbead79-b86e-4bee-8e66-b65b2b93137c/스크린샷_2022-05-06_오후_8.52.46.png)
+<img width="310" alt="스크린샷 2022-05-06 오후 8 52 46" src="https://user-images.githubusercontent.com/97952129/167128209-dcf41876-0c36-4ebc-af67-f066afd4a765.png">
 
 ## select_btn.xml
 
