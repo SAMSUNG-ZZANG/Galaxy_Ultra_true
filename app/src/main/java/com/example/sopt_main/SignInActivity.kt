@@ -46,17 +46,10 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
         }
-        initImage()
 
     }
 
-    private  fun initImage(){
-        Glide.with(this)
-            .load(R.drawable.selfie_true)
-            .circleCrop()
-            .into(binding.mainImage)
 
-    }
 
 
 

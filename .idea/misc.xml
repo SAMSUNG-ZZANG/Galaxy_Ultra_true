@@ -5,11 +5,14 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/btn_not_seleted.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/camera.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/github.xml" value="0.166" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/ic_android_.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/profile.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/purple2_btn.xml" value="0.148" />
+        <entry key="app/src/main/res/drawable/purple_btn.xml" value="0.148" />
         <entry key="app/src/main/res/drawable/round_btn.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/round_list.xml" value="0.157" />
         <entry key="app/src/main/res/drawable/select_btn.xml" value="0.1" />
@@ -19,20 +22,20 @@
         <entry key="app/src/main/res/font/noto_sans_family.xml" value="0.1361111111111111" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="app/src/main/res/layout/activity_seminar_main.xml" value="0.1070110701107011" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/follower_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/follower_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21875" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.10112359550561797" />
         <entry key="app/src/main/res/layout/fragment_repository.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_tab_follower.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/fragment_tab_following.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/fragment_test1.xml" value="0.23233695652173914" />
         <entry key="app/src/main/res/layout/fragment_test2.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/fragment_test3.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/repository_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_test3.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/repository_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/shape_unselect_edit.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_sample.xml" value="0.1" />
       </map>

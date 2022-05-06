@@ -23,7 +23,8 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
 
-
+        binding.homeFollowerBtn.isSelected =true
+        binding.homeRepoBtn.isSelected =false
         transactionFragment()
         initImage()
 
