@@ -328,3 +328,4 @@ override fun onCreateView(
 ---
 
 # ✔️실행영상
+https://user-images.githubusercontent.com/97952129/167128427-744bb7dd-7c0a-49ee-89a0-004ddb481fbb.mov
