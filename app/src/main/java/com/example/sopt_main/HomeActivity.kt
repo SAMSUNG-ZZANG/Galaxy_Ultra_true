@@ -7,13 +7,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.sopt_main.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var home_binding : ActivityHomeBinding
+    private lateinit var homeBinding : ActivityHomeBinding
     private lateinit var testViewPagerAdaptor: TestViewPagerAdaptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        home_binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(home_binding.root)
+        homeBinding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(homeBinding.root)
 
         initAdaptor()
         initBottomNavi()
@@ -24,28 +24,28 @@ class HomeActivity : AppCompatActivity() {
         testViewPagerAdaptor = TestViewPagerAdaptor(this)
         testViewPagerAdaptor.fragments.addAll(fragmentList)
 
-        home_binding.homeVp.adapter = testViewPagerAdaptor
+        homeBinding.homeVp.adapter = testViewPagerAdaptor
     }
 
     private fun initBottomNavi(){
-        home_binding.homeVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        homeBinding.homeVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
-                home_binding.homeBnv.menu.getItem(position).isChecked = true
+                homeBinding.homeBnv.menu.getItem(position).isChecked = true
             }
         })
 
-        home_binding.homeBnv.setOnItemSelectedListener {
+        homeBinding.homeBnv.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.menu_android -> {
-                    home_binding.homeVp.currentItem = FIRST_FRAGMENT
+                    homeBinding.homeVp.currentItem = FIRST_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
                 R.id.menu_list -> {
-                    home_binding.homeVp.currentItem = SECOND_FRAGMENT
+                    homeBinding.homeVp.currentItem = SECOND_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
                 else -> {
-                    home_binding.homeVp.currentItem = THIRD_FRAGMENT
+                    homeBinding.homeVp.currentItem = THIRD_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
             }
