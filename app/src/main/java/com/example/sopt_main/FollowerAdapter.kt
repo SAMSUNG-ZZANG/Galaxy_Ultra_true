@@ -26,7 +26,6 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
     ) : RecyclerView.ViewHolder(binding.root){
         fun onBind(data: FollowerData){
             binding.followerName.text = data.name
-            binding.followerIntroduce.text = data.introduction
             Glide.with(binding.root)
                 .load(R.drawable.selfie_true)
                 .circleCrop()
