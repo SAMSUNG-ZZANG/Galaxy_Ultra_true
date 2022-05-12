@@ -41,27 +41,28 @@ class FollowerFragment : Fragment() {
 
     private fun followerUserNetwork(){
 
-        val call: Call<ResponseFollowerInfo> = GithubServiceCreator.githubService.getUserInfo("jinsilWoo")
+        val call: Call<List<ResponseFollowerInfo>> = GithubServiceCreator.githubService.getUserInfo("jinsilWoo")
 
-        call.enqueue(object : Callback<ResponseFollowerInfo> {
+        call.enqueue(object : Callback<List<ResponseFollowerInfo>> {
 
                 override fun onResponse(
-                    call: Call<ResponseFollowerInfo>,
-                    response: Response<ResponseFollowerInfo>
+                    call: Call<List<ResponseFollowerInfo>>,
+                    response: Response<List<ResponseFollowerInfo>>
                 ) {
                     val data = response.body()
 
                     followerAdapter = FollowerAdapter()
                     _binding?.rvFollower?.adapter = followerAdapter
+
                     if (data != null) {
-                        followerAdapter.followerList.add(FollowerData(data.avatar_url,data.login))
+                        followerAdapter.followerList = data.toMutableList()
                     }
                     followerAdapter.notifyDataSetChanged()
 
 
                 }
 
-                override fun onFailure(call: Call<ResponseFollowerInfo>, t: Throwable) {
+                override fun onFailure(call: Call<List<ResponseFollowerInfo>>, t: Throwable) {
                     Log.e("GitHubTest", "error:$t")
                 }
             }

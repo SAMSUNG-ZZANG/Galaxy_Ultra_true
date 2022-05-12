@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sopt_main.Git_follower.ResponseFollowerInfo
 import com.example.sopt_main.databinding.FollowerListBinding
 
 class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(){
-    val followerList = mutableListOf<FollowerData>()
+    var followerList = mutableListOf<ResponseFollowerInfo>()
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FollowerViewHolder{
         val binding =
@@ -24,10 +25,10 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
     class FollowerViewHolder(
             private val binding:FollowerListBinding
     ) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(data: FollowerData){
-            binding.followerName.text = data.name
+        fun onBind(data: ResponseFollowerInfo){
+            binding.followerName.text = data.login
             Glide.with(binding.root)
-                .load(R.drawable.selfie_true)
+                .load(data.avatar_url)
                 .circleCrop()
                 .into(binding.followerProfile)
 
