@@ -20,7 +20,7 @@
 ---
 
 # ✔️회원가입 완료
-https://user-images.githubusercontent.com/97952129/168269398-053cb20e-a212-4f82-bd37-eb984c08c26b.mov
+<img src="https://user-images.githubusercontent.com/97952129/168303390-208d12a9-40d9-46b1-91bc-c57a867d066f.gif" width ="300" height="500"/>
 
 ---
 
