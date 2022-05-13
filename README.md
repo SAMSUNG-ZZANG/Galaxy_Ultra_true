@@ -1,73 +1,309 @@
-# SignInActivity
+# Seminar04
 
- 
+---
 
-### 회원가입 화면에서 입력했던 아이디와 비밀번호를 받아오기 (성장과제)
-![Untitled](https://user-images.githubusercontent.com/97952129/162616058-57847fb4-1193-49a0-8be9-482f1d84f8c2.png)
+## 
 
-
-- registerForActivityResult() 를 선언한 변수 resultLauncher 에 담는다.
-- registerForActivityResult() 는 인자로 StartActicityForResult() 를 받는다.
-- if 문을 통해 result 객체의 resultcode  를 확인한다.
-- result의 intent로 부터 getStringExtra로 원하던 아이디와 비밀번호를 받아온다.
-- 로그인 화면의 idText 와 pwdText 를 setText()로 받아온 id 와 pwd 의 데이터를 보여준다.
-
-### EditText에 아이디, 비밀번호 중 하나라도 비어있으면 토스트 메세지 출력
-![Untitled (2)](https://user-images.githubusercontent.com/97952129/162616187-b8d434e3-8a53-4178-9b6f-7df6569f9668.png)
+# ✔️POSTMAN 테스트
 
 
-- binding에서 받아온 idText의 text 가 널값일 경우를 isNullOrBlank()를 통해 확인하였다.
-- 둘 중에 하나라도 비어있을 경우 아이디 비밀번호를 확인해달라는 토스트 메세지를 띄웠고
-
-그렇지 않을 경우 로그인 성공 토스트 메세지를 띄운다.
-
-→ 처음에는 if 문에서 binding.idText.text = “” 이렇게 작성했었는데 idText 자체가 String 타입이 아니라는 오류가 발생해서  isNullOrBlank() 를 사용하였다. 
-
-### Activity를 intent 를  통해 넘어오기
-![Untitled (3)](https://user-images.githubusercontent.com/97952129/162616206-d3b655c1-2d7a-43b4-a8d7-e1a15e900882.png)
+<img width="849" alt="스크린샷 2022-05-13 오후 7 37 08" src="https://user-images.githubusercontent.com/97952129/168267943-eea2febc-e614-4daf-9b91-b82c227f4198.png">
 
 
+- 회원가입 서버 연결
 
-- intent 를 활용하여 SignUpActivity 에서 아이디와 비밀번호의 입력 데이터를  받은 Activity를 반환하여 보여준다.
-
-→ 결과값을 받은 resultLauncher 로 변경해주지 않고 기존의 SignInActivity로 돌아와서 어려움을 겪었었다...
-
-# SignUpActivity
-
-### 회원가입 버튼을 눌렀을 경우
-
-![Untitled (4)](https://user-images.githubusercontent.com/97952129/162616232-8737fe14-b4b1-499e-aeda-e1dee50b27b6.png)
+<img width="870" alt="스크린샷 2022-05-13 오후 7 42 33" src="https://user-images.githubusercontent.com/97952129/168267889-74883b31-e0f2-4477-8a11-3c4add815000.png">
 
 
+- 애뮬에서 회원가입한 아이디로 로그인 서버 연결
 
-- 이름, 아이디, 비밀번호 중 하나라도 비어있다면 토스트메세지를 출력한다.
-- 전부 다 입력되었다면 intent 를 활용하여 id와 pwd 값을 저장한다.
-- finish() 함수를 사용하여 Activity 종료한다.
+---
 
-→ stack 처럼 쌓여있어서 바로 전에 있던 SignInActivity 로 넘어간다.
+# ✔️회원가입 완료
+https://user-images.githubusercontent.com/97952129/168269398-053cb20e-a212-4f82-bd37-eb984c08c26b.mov
 
-# activity_main_xml 와 activity_sign_up_xml
-![Untitled (5)](https://user-images.githubusercontent.com/97952129/162616249-8076aaec-b98b-41c5-a2a7-a58337a1e0c7.png)
+---
 
-
-- hint 속성을 사용하여 미리보기 글씨를 나타내었다.
-- inputType 속성을 사용하였고 “textPassword” 로 입력내용을 가렸다.
+# ✔️로그인 구현
+<img src="https://user-images.githubusercontent.com/97952129/168268256-4839b6b0-e219-4e34-ae50-fa346f943c0e.gif" width="300" height="500"/>
 
 
 ---
 
-https://user-images.githubusercontent.com/97952129/162616272-1c7f6851-d7ab-4963-be4b-e53fe579f344.mp4
+## Interface(SoptService)
 
+```kotlin
+interface SoptService {
+    @POST("auth/signin")
+    fun postLogin(
+        @Body body: RequestSignIn
+    ): Call<ResponseSignIn>
 
-# activity_home_xml
-![Untitled (6)](https://user-images.githubusercontent.com/97952129/162616300-631aabd9-e334-4379-b968-6ab6b330ef16.png)
+    @POST("auth/signup")
+    fun postSignUp(
+        @Body body: RequestSignUp
+    ): Call<ResponseSignUp>
+}
+```
 
+- 서버에게 데이터를 제출하는 @POST 사용함, API의 url 을 작성해줌
+- @BODY 안에 Call<T> 형식으로 응답될 body 타입의 data class를 불러옴
+- 여기서 Response 에 해당하는 객체는 json object 타입
+- SoptService 안에  로그인과 회원가입 둘다 작성해줌
 
-- ScrollView를 구현하기 위해 전체 레이아웃을 ConstraintLayout 으로 설정하고 ScrollView 안에 ConstraintLayout 을 구현해주었다.
-- src 속성을 사용하여 사진을 넣어주었다.
-- constraintDimensionRatio 속성을 사용하여 사진의 비율을 1:1 로 맞춰준다.
+---
 
+## ServiceCreator
 
-https://user-images.githubusercontent.com/97952129/162616326-085dce5f-d0ed-4a54-a75c-cbc8d9e8b514.mp4
+```kotlin
+object ServiceCreator {
+    private  const val BASE_URL = "http://13.124.62.236/"
 
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
+    val soptService: SoptService = retrofit.create(SoptService::class.java)
+}
+```
+
+- object 를 활용하여 어디서든 접근 가능하게 만들어줌
+- gson 컨버터 연동을 해주어야함,,꼭,,
+- SoptService 에 있는 인터페이스 객체를 create에 넘겨주기
+
+---
+
+## SignIn( 로그인 data class )
+
+### ResponseSignIn
+
+```kotlin
+
+data class ResponseSignIn(
+    val status: Int,
+    val message: String,
+    val data: Data
+){
+    data class Data(
+        val name: String,
+        val email: String
+    )
+}
+
+```
+
+- 서버로부터 받아와 ResponseData로 변환해주기
+
+### RequestSignIn
+
+```kotlin
+data class RequestSignIn(
+    val email :String,
+    val password : String
+)
+
+```
+
+- gsonData로 변환시켜 서버에게 전달하기
+
+---
+
+## SignUp( 회원가입 data class )
+
+### ResponseSignUp
+
+```kotlin
+data class ResponseSignUp(
+    val status: Int,
+    val message: String,
+    val data: Data
+) {
+    data class Data(
+        val id : Int
+    )
+}
+```
+
+### RequestSignUp
+
+```kotlin
+data class RequestSignUp(
+    val name:String,
+    val email:String,
+    val password : String
+
+)
+```
+
+---
+
+### SignInActivity
+
+```kotlin
+private fun loginNetwork(){
+        val requestSignIn = RequestSignIn(
+            email = binding.mainEditId.text.toString(),
+            password = binding.mainEditPwd.text.toString()
+        )
+//        Log.d(TAG, "loginNetwork: ${binding.mainEditId.text}, ${binding.mainEditPwd}")
+        val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
+
+        call.enqueue(object : Callback<ResponseSignIn> {
+            override fun onResponse(
+                call: Call<ResponseSignIn>,
+                response: Response<ResponseSignIn>
+            ){
+                if(response.isSuccessful) {
+                    val data = response.body()?.data
+
+                    Toast.makeText(this@SignInActivity,"${data?.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@SignInActivity,HomeActivity::class.java))
+                }else{
+                    Toast.makeText(this@SignInActivity,"로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignInActivity,"onresponse else", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<ResponseSignIn>, t: Throwable) {
+                Log.e("NetworkTest","error:$t")
+            }
+        })
+
+    }
+```
+
+- requestSignIn 변수에 editText에서 받아온 email 과 password 를 넣어줌
+- call 변수에 만들어준 interface에 접근하여 Call 객체 받아옴
+- onResponse() : 서버에서 데이터를 잘받아왔다면 토스트메세지 띄우고 HomeActivity 로 이동
+
+만약, 실패했다면 실패했다는 토스트 메세지 띄우기
+
+---
+
+### SignUpActivity
+
+```kotlin
+private fun signUpNetwork(){
+    val requestSignUp = RequestSignUp(
+        name = binding.signUpEditName.text.toString(),
+        email = binding.signUpEditId.text.toString(),
+        password = binding.signUpEditPwd.text.toString()
+    )
+
+    val call: Call<ResponseSignUp> = ServiceCreator.soptService.postSignUp(requestSignUp)
+
+    call.enqueue(object : Callback<ResponseSignUp> {
+        override fun onResponse(
+            call: Call<ResponseSignUp>,
+            response: Response<ResponseSignUp>
+        ){
+
+            if(response.isSuccessful) {
+                val data = response.body()?.data
+                Toast.makeText(this@SignUpActivity,"${data?.id}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this@SignUpActivity,"회원가입 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SignUpActivity,"onresponse else", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
+            Log.e("NetworkTest","error:$t")
+        }
+    })
+
+}
+```
+
+- 위의 SignInActivity의 loginNetwork() 와 비슷한 구현 방법
+
+---
+
+# 깃허브 연동하기
+
+## Interface
+
+```kotlin
+interface GithubService {
+    @GET("users/{username}/following")
+    fun getUserInfo(@Path("username")username:String): Call<List<ResponseFollowerInfo>>
+}
+```
+
+- 서버에서 데이터를 불러오는 @GET 사용
+- API 문서의 어노테이션 작성
+- @Path(”동적으로 변하는 변수")
+- Call<T> 객체 불러오기 → 이때 불러오는 객체는 json Array 여서 List<ResponseFollowerInfo> 로 불러와줌
+
+---
+
+## GithubServiceCreator
+
+```kotlin
+object GithubServiceCreator {
+    private const val BASE_URL = "https://api.github.com/"
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+        val githubService: GithubService = retrofit.create(GithubService::class.java)
+
+}
+```
+
+---
+
+## ResponseFollowerInfo
+
+```kotlin
+data class ResponseFollowerInfo(
+
+    val login: String,
+    val avatar_url: String
+
+)
+
+```
+
+- 서버에게 응답 받을 깃허브 아이디와 프로필 사진 data class 작성
+
+---
+
+## FollowerFragment
+
+```kotlin
+private fun followerUserNetwork(){
+
+    val call: Call<List<ResponseFollowerInfo>> = GithubServiceCreator.githubService.getUserInfo("jinsilWoo")
+
+    call.enqueue(object : Callback<List<ResponseFollowerInfo>> {
+
+            override fun onResponse(
+                call: Call<List<ResponseFollowerInfo>>,
+                response: Response<List<ResponseFollowerInfo>>
+            ) {
+                val data = response.body()
+
+                followerAdapter = FollowerAdapter()
+                _binding?.rvFollower?.adapter= followerAdapter
+
+                if (data != null) {
+                    followerAdapter.followerList = data.toMutableList()
+                }
+                followerAdapter.notifyDataSetChanged()
+
+            }
+
+            override fun onFailure(call: Call<List<ResponseFollowerInfo>>, t: Throwable) {
+                Log.e("GitHubTest", "error:$t")
+            }
+        }
+    )
+}
+
+```
+
+- call 변수에 GithubServiceCreator 의 getUserInfo(”계정이름”) 넣어줌
+- 서버 연결이 되었다면 followerAdapter 의 followerList에 서버에서 받은 데이터를 넣어줌
+- 이 때, data 의 형식은 toMutableList() 로 해줌
