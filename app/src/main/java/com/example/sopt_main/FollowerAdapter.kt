@@ -33,9 +33,5 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
                 .into(binding.followerProfile)
 
             }
-
     }
-
-
-
 }

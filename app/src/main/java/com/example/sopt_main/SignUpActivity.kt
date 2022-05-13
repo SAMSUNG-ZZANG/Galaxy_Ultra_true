@@ -1,12 +1,13 @@
 package com.example.sopt_main
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.sopt_main.databinding.ActivityMainBinding
+import com.example.sopt_main.Server.RequestSignUp
+import com.example.sopt_main.Server.ResponseSignUp
+import com.example.sopt_main.Server.ServiceCreator
 import com.example.sopt_main.databinding.ActivitySignUpBinding
 import retrofit2.Call
 import retrofit2.Callback

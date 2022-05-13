@@ -1,4 +1,4 @@
-package com.example.sopt_main
+package com.example.sopt_main.Server
 
 import retrofit2.Call
 import retrofit2.http.Body

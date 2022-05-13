@@ -39,7 +39,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun initTabLayout(){
-        val tabLabel = listOf("팔로우","팔로워")
+
+        val tabLabel = resources.getStringArray(R.array.follower_list) //
 
         TabLayoutMediator(binding.homeTap, binding.homeVp) {tab, position ->
             tab.text = tabLabel[position]

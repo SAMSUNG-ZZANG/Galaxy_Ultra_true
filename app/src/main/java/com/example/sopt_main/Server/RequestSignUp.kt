@@ -1,4 +1,4 @@
-package com.example.sopt_main
+package com.example.sopt_main.Server
 
 
 data class RequestSignUp(

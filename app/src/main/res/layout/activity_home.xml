@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemIconTint="@color/select_bottom_navi"
-        app:itemRippleColor="#6424D5"
+        app:itemRippleColor="@color/select_bottom_navi"
         app:itemTextColor="@color/select_bottom_navi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_sample"/>

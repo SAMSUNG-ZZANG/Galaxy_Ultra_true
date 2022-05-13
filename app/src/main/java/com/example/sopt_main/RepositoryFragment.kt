@@ -20,16 +20,9 @@ class RepositoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View?{
         _binding = FragmentRepositoryBinding.inflate(layoutInflater,container,false)
-
-        binding.rvFollower.setOnClickListener {
-            repoAdaptor
-        }
-
         binding.rvFollower.addItemDecoration(DividerItemDecoration(context,1))
 
-
         initFollowerAdaptor()
-
         return binding.root
     }
 

@@ -1,10 +1,13 @@
 package com.example.sopt_main
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.bumptech.glide.Glide
 import com.example.sopt_main.databinding.FragmentProfileBinding
 
@@ -37,14 +40,17 @@ class ProfileFragment : Fragment() {
         val fragment1 =FollowerFragment()
         val fragment2 =RepositoryFragment()
 
-        childFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
+//        childFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
+
+        childFragmentManager.commit{
+            replace<FollowerFragment>(R.id.profile_fragment)
+        } //Fragment KTX를 사용하여 람다로 프래그먼트 트랜잭션을 단순화 할 수 있음
 
         binding.homeFollowerBtn.setOnClickListener{
             val transaction = childFragmentManager.beginTransaction()
             binding.homeFollowerBtn.isSelected =true
             binding.homeRepoBtn.isSelected =false
-            transaction.replace(R.id.profile_fragment,fragment1)
-            transaction.commit()
+            transaction.replace(R.id.profile_fragment,fragment1).commit()
         }
 
         binding.homeRepoBtn.setOnClickListener{

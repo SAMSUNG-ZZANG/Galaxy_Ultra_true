@@ -1,15 +1,15 @@
 package com.example.sopt_main
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
+import com.example.sopt_main.Server.RequestSignIn
+import com.example.sopt_main.Server.ResponseSignIn
+import com.example.sopt_main.Server.ServiceCreator
 import com.example.sopt_main.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,9 +55,7 @@ class SignInActivity : AppCompatActivity() {
             email = binding.mainEditId.text.toString(),
             password = binding.mainEditPwd.text.toString()
         )
-
 //        Log.d(TAG, "loginNetwork: ${binding.mainEditId.text}, ${binding.mainEditPwd}")
-
         val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
 
         call.enqueue(object : Callback<ResponseSignIn> {
@@ -68,7 +66,6 @@ class SignInActivity : AppCompatActivity() {
                 if(response.isSuccessful) {
                     val data = response.body()?.data
 
-
                     Toast.makeText(this@SignInActivity,"${data?.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@SignInActivity,HomeActivity::class.java))
                 }else{
@@ -76,11 +73,9 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(this@SignInActivity,"onresponse else", Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onFailure(call: Call<ResponseSignIn>, t: Throwable) {
                 Log.e("NetworkTest","error:$t")
             }
-
         })
 
     }
