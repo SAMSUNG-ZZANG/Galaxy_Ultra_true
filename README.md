@@ -2,7 +2,7 @@
 
 ---
 
-# ✔️BottomNavigation
+# BottomNavigation
 
 ---
 
@@ -152,7 +152,7 @@ companion object{
 
 ---
 
-# ✔️TabLayout
+# TabLayout
 
 ---
 
@@ -243,7 +243,7 @@ tab.text= tabLabel[position]
 
 ---
 
-# ✔️이미지 원형 표시하기
+# 이미지 원형 표시하기
 
 ```
 private  fun initImage(){
@@ -259,7 +259,7 @@ private  fun initImage(){
 
 ---
 
-# ✔️Selector
+# Selector
 
 <img width="310" alt="스크린샷 2022-05-06 오후 8 52 46" src="https://user-images.githubusercontent.com/97952129/167128209-dcf41876-0c36-4ebc-af67-f066afd4a765.png">
 
@@ -327,5 +327,5 @@ override fun onCreateView(
 
 ---
 
-# ✔️실행영상
+# 실행영상
 https://user-images.githubusercontent.com/97952129/167128427-744bb7dd-7c0a-49ee-89a0-004ddb481fbb.mov
