@@ -1,9 +1,13 @@
-package com.example.sopt_main
+package com.example.sopt_main.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.sopt_main.fragment.HomeFragment
+import com.example.sopt_main.fragment.ProfileFragment
+import com.example.sopt_main.R
+import com.example.sopt_main.fragment.TestFragment3
+import com.example.sopt_main.adapter.TestViewPagerAdaptor
 import com.example.sopt_main.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -20,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
     private fun initAdaptor(){
-        val fragmentList = listOf(ProfileFragment(),HomeFragment(),TestFragment3())
+        val fragmentList = listOf(ProfileFragment(), HomeFragment(), TestFragment3())
         testViewPagerAdaptor = TestViewPagerAdaptor(this)
         testViewPagerAdaptor.fragments.addAll(fragmentList)
 

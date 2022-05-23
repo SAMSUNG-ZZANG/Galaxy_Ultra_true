@@ -1,4 +1,4 @@
-package com.example.sopt_main.Server
+package com.example.sopt_main.response
 
 data class ResponseSignIn(
     val status: Int,

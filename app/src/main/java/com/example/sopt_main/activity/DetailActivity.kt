@@ -1,4 +1,4 @@
-package com.example.sopt_main
+package com.example.sopt_main.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

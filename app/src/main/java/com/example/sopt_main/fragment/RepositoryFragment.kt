@@ -1,4 +1,4 @@
-package com.example.sopt_main
+package com.example.sopt_main.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.sopt_main.adapter.RepositoryAdaptor
+import com.example.sopt_main.data.model.RepositoryData
 import com.example.sopt_main.databinding.FragmentRepositoryBinding
 
 

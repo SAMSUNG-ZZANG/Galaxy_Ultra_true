@@ -1,5 +1,6 @@
-package com.example.sopt_main.Server
+package com.example.sopt_main.data
 
+import com.example.sopt_main.data.service.SoptService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

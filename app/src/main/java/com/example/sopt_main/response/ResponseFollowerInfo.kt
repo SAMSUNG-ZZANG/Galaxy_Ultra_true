@@ -1,4 +1,4 @@
-package com.example.sopt_main.Git_follower
+package com.example.sopt_main.response
 
 data class ResponseFollowerInfo(
 

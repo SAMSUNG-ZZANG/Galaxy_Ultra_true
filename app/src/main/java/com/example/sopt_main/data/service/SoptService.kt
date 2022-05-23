@@ -1,5 +1,9 @@
-package com.example.sopt_main.Server
+package com.example.sopt_main.data.service
 
+import com.example.sopt_main.request.RequestSignIn
+import com.example.sopt_main.request.RequestSignUp
+import com.example.sopt_main.response.ResponseSignIn
+import com.example.sopt_main.response.ResponseSignUp
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

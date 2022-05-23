@@ -1,5 +1,6 @@
-package com.example.sopt_main.Git_follower
+package com.example.sopt_main.data
 
+import com.example.sopt_main.data.service.GithubService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
