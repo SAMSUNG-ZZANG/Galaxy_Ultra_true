@@ -1,6 +1,7 @@
-package com.example.sopt_main.fragment
+package com.example.sopt_main
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.bumptech.glide.Glide
-import com.example.sopt_main.R
-import com.example.sopt_main.adapter.TestViewPagerAdaptor
 import com.example.sopt_main.databinding.FragmentProfileBinding
 
 
@@ -38,8 +37,8 @@ class ProfileFragment : Fragment() {
 
     private fun transactionFragment(){
 
-        val fragment1 = FollowerFragment()
-        val fragment2 = RepositoryFragment()
+        val fragment1 =FollowerFragment()
+        val fragment2 =RepositoryFragment()
 
 //        childFragmentManager.beginTransaction().add(R.id.profile_fragment,fragment1).commit()
 

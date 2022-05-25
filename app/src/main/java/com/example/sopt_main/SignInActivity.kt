@@ -1,4 +1,4 @@
-package com.example.sopt_main.activity
+package com.example.sopt_main
 
 import android.app.Activity
 import android.content.Intent
@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.sopt_main.request.RequestSignIn
-import com.example.sopt_main.response.ResponseSignIn
-import com.example.sopt_main.data.ServiceCreator
+import com.example.sopt_main.Server.RequestSignIn
+import com.example.sopt_main.Server.ResponseSignIn
+import com.example.sopt_main.Server.ServiceCreator
 import com.example.sopt_main.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -67,7 +67,7 @@ class SignInActivity : AppCompatActivity() {
                     val data = response.body()?.data
 
                     Toast.makeText(this@SignInActivity,"${data?.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+                    startActivity(Intent(this@SignInActivity,HomeActivity::class.java))
                 }else{
                     Toast.makeText(this@SignInActivity,"로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
                     Toast.makeText(this@SignInActivity,"onresponse else", Toast.LENGTH_SHORT).show()

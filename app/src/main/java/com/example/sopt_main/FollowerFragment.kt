@@ -1,5 +1,6 @@
-package com.example.sopt_main.fragment
+package com.example.sopt_main
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.sopt_main.data.GithubServiceCreator
-import com.example.sopt_main.response.ResponseFollowerInfo
-import com.example.sopt_main.adapter.FollowerAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt_main.Git_follower.GithubServiceCreator
+import com.example.sopt_main.Git_follower.ResponseFollowerInfo
 import com.example.sopt_main.databinding.FragmentFollowerBinding
 import retrofit2.Call
 import retrofit2.Callback

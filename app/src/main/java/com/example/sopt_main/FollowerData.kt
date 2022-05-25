@@ -1,4 +1,4 @@
-package com.example.sopt_main.data.model
+package com.example.sopt_main
 
 data class FollowerData(
         val image : String,

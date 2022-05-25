@@ -1,16 +1,16 @@
-package com.example.sopt_main.adapter
+package com.example.sopt_main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.sopt_main.response.ResponseFollowerInfo
+import com.example.sopt_main.Git_follower.ResponseFollowerInfo
 import com.example.sopt_main.databinding.FollowerListBinding
 
 class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(){
     var followerList = mutableListOf<ResponseFollowerInfo>()
 
-    override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FollowerViewHolder {
+    override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FollowerViewHolder{
         val binding =
                 FollowerListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return  FollowerViewHolder(binding)

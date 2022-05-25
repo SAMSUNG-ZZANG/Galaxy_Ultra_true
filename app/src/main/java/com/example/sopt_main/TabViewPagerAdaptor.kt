@@ -1,4 +1,4 @@
-package com.example.sopt_main.adapter
+package com.example.sopt_main
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

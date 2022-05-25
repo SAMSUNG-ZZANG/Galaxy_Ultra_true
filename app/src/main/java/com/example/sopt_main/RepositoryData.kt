@@ -1,4 +1,4 @@
-package com.example.sopt_main.data.model
+package com.example.sopt_main
 
 data class RepositoryData(
     val title : String,
