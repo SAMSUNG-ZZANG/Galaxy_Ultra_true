@@ -10,9 +10,8 @@
         android:id="@+id/rv_follower"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:orientation="vertical"
-        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
         tools:listitem="@layout/follower_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.sopt_main.databinding.FragmentRepositoryBinding
 
 
@@ -20,10 +21,14 @@ class RepositoryFragment : Fragment() {
     ): View?{
         _binding = FragmentRepositoryBinding.inflate(layoutInflater,container,false)
 
-        initFollowerAdaptor()
+        binding.rvFollower.setOnClickListener {
+            repoAdaptor
+        }
 
-        binding.rvFollower.addItemDecoration(VerticalItemDecorator(20))
-        binding.rvFollower.addItemDecoration(HorizontalItemDecorator(20))
+        binding.rvFollower.addItemDecoration(DividerItemDecoration(context,1))
+
+
+        initFollowerAdaptor()
 
         return binding.root
     }

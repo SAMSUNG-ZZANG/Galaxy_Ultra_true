@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.sopt_main.databinding.ActivityMainBinding
 
 class SignInActivity : AppCompatActivity() {
@@ -46,8 +47,9 @@ class SignInActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
 
-
     }
+
+
 
 
 
