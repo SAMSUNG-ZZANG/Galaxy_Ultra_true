@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sopt_main.ui.fragment.HomeFragment
 import com.example.sopt_main.R
-import com.example.sopt_main.TestFragment3
+import com.example.sopt_main.ui.fragment.TestFragment3
 import com.example.sopt_main.adapter.TestViewPagerAdaptor
 import com.example.sopt_main.databinding.ActivityHomeBinding
 import com.example.sopt_main.ui.fragment.ProfileFragment
