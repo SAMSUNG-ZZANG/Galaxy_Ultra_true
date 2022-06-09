@@ -1,9 +1,11 @@
 package com.example.sopt_main.ui.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.sopt_main.server.request.RequestSignIn
@@ -11,11 +13,11 @@ import com.example.sopt_main.server.response.ResponseSignIn
 import com.example.sopt_main.server.ServiceCreator
 import com.example.sopt_main.databinding.ActivityMainBinding
 import com.example.sopt_main.enqueueUtil
+import com.example.sopt_main.util.SOPTSharedPreferences
 import retrofit2.Call
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,8 @@ class SignInActivity : AppCompatActivity() {
         }
 
         initEvent()
+        initClickEvent()
+        isAutoLogin()
 
     }
 
@@ -68,4 +72,27 @@ class SignInActivity : AppCompatActivity() {
             }
         )
     }
+
+    private fun initClickEvent(){
+        binding.ivSignInCheckbox.setOnClickListener{
+            Log.d("df","${binding.ivSignInCheckbox.isSelected}")
+            binding.ivSignInCheckbox.isSelected =!binding.ivSignInCheckbox.isSelected
+            SOPTSharedPreferences.setAutoLogin(this,binding.ivSignInCheckbox.isSelected)
+        }
+
+    }
+
+   private fun isAutoLogin() {
+        if(SOPTSharedPreferences.getAutoLogin(this)){
+            showToast("자동로그인 되었습니다")
+            startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            finish()
+        }
+    }
+
+
+    fun Context.showToast(msg:String){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Sopt_main"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.activity.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.NavHostActivity"
             android:exported="false" />
         <activity android:name=".ui.activity.SignUpActivity" />
