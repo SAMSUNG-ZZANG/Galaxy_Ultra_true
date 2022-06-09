@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.sopt_main.Server.GithubServiceCreator
-import com.example.sopt_main.Server.response.ResponseFollowerInfo
+import com.example.sopt_main.server.GithubServiceCreator
+import com.example.sopt_main.server.response.ResponseFollowerInfo
 import com.example.sopt_main.adapter.FollowerAdapter
 import com.example.sopt_main.databinding.FragmentFollowerBinding
 import retrofit2.Call

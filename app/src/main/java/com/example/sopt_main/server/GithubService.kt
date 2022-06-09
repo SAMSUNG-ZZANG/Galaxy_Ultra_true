@@ -1,6 +1,6 @@
-package com.example.sopt_main.Server
+package com.example.sopt_main.server
 
-import com.example.sopt_main.Server.response.ResponseFollowerInfo
+import com.example.sopt_main.server.response.ResponseFollowerInfo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

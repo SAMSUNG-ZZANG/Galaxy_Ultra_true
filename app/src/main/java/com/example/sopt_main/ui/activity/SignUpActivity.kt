@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.sopt_main.Server.request.RequestSignUp
-import com.example.sopt_main.Server.response.ResponseSignUp
-import com.example.sopt_main.Server.ServiceCreator
+import com.example.sopt_main.server.request.RequestSignUp
+import com.example.sopt_main.server.response.ResponseSignUp
+import com.example.sopt_main.server.ServiceCreator
 import com.example.sopt_main.databinding.ActivitySignUpBinding
 import com.example.sopt_main.enqueueUtil
 import retrofit2.Call

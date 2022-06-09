@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.sopt_main.Server.request.RequestSignIn
-import com.example.sopt_main.Server.response.ResponseSignIn
-import com.example.sopt_main.Server.ServiceCreator
+import com.example.sopt_main.server.request.RequestSignIn
+import com.example.sopt_main.server.response.ResponseSignIn
+import com.example.sopt_main.server.ServiceCreator
 import com.example.sopt_main.databinding.ActivityMainBinding
 import com.example.sopt_main.enqueueUtil
 import retrofit2.Call
