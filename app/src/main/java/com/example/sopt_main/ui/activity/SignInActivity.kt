@@ -57,7 +57,6 @@ class SignInActivity : AppCompatActivity() {
             email = binding.mainEditId.text.toString(),
             password = binding.mainEditPwd.text.toString()
         )
-//        Log.d(TAG, "loginNetwork: ${binding.mainEditId.text}, ${binding.mainEditPwd}")
 
         val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
 
@@ -75,7 +74,6 @@ class SignInActivity : AppCompatActivity() {
 
     private fun initClickEvent(){
         binding.ivSignInCheckbox.setOnClickListener{
-            Log.d("df","${binding.ivSignInCheckbox.isSelected}")
             binding.ivSignInCheckbox.isSelected =!binding.ivSignInCheckbox.isSelected
             SOPTSharedPreferences.setAutoLogin(this,binding.ivSignInCheckbox.isSelected)
         }

@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.example.sopt_main.databinding.ActivityMainBinding
 import com.example.sopt_main.databinding.ActivitySettingBinding
 import com.example.sopt_main.util.SOPTSharedPreferences
 
@@ -24,12 +22,10 @@ class SettingActivity : AppCompatActivity() {
 
     private fun isAutoLogout() {
         binding.btnSettingLogout.setOnClickListener {
-            if (SOPTSharedPreferences.setLogout(this)) {
-                showToast("자동 로그인 해제")
-            }
+            SOPTSharedPreferences.setLogout(this)
+            showToast("자동 로그인 해제")
             startActivity(Intent(this@SettingActivity, SignInActivity::class.java))
             finish()
-
         }
     }
 
