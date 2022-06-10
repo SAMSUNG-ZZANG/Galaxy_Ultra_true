@@ -1,73 +1,303 @@
-# SignInActivity
+# 🖤Seminar07
 
- 
+# ✔️ 자동 로그인 구현
 
-### 회원가입 화면에서 입력했던 아이디와 비밀번호를 받아오기 (성장과제)
-![Untitled](https://user-images.githubusercontent.com/97952129/162616058-57847fb4-1193-49a0-8be9-482f1d84f8c2.png)
-
-
-- registerForActivityResult() 를 선언한 변수 resultLauncher 에 담는다.
-- registerForActivityResult() 는 인자로 StartActicityForResult() 를 받는다.
-- if 문을 통해 result 객체의 resultcode  를 확인한다.
-- result의 intent로 부터 getStringExtra로 원하던 아이디와 비밀번호를 받아온다.
-- 로그인 화면의 idText 와 pwdText 를 setText()로 받아온 id 와 pwd 의 데이터를 보여준다.
-
-### EditText에 아이디, 비밀번호 중 하나라도 비어있으면 토스트 메세지 출력
-![Untitled (2)](https://user-images.githubusercontent.com/97952129/162616187-b8d434e3-8a53-4178-9b6f-7df6569f9668.png)
-
-
-- binding에서 받아온 idText의 text 가 널값일 경우를 isNullOrBlank()를 통해 확인하였다.
-- 둘 중에 하나라도 비어있을 경우 아이디 비밀번호를 확인해달라는 토스트 메세지를 띄웠고
-
-그렇지 않을 경우 로그인 성공 토스트 메세지를 띄운다.
-
-→ 처음에는 if 문에서 binding.idText.text = “” 이렇게 작성했었는데 idText 자체가 String 타입이 아니라는 오류가 발생해서  isNullOrBlank() 를 사용하였다. 
-
-### Activity를 intent 를  통해 넘어오기
-![Untitled (3)](https://user-images.githubusercontent.com/97952129/162616206-d3b655c1-2d7a-43b4-a8d7-e1a15e900882.png)
-
-
-
-- intent 를 활용하여 SignUpActivity 에서 아이디와 비밀번호의 입력 데이터를  받은 Activity를 반환하여 보여준다.
-
-→ 결과값을 받은 resultLauncher 로 변경해주지 않고 기존의 SignInActivity로 돌아와서 어려움을 겪었었다...
-
-# SignUpActivity
-
-### 회원가입 버튼을 눌렀을 경우
-
-![Untitled (4)](https://user-images.githubusercontent.com/97952129/162616232-8737fe14-b4b1-499e-aeda-e1dee50b27b6.png)
-
-
-
-- 이름, 아이디, 비밀번호 중 하나라도 비어있다면 토스트메세지를 출력한다.
-- 전부 다 입력되었다면 intent 를 활용하여 id와 pwd 값을 저장한다.
-- finish() 함수를 사용하여 Activity 종료한다.
-
-→ stack 처럼 쌓여있어서 바로 전에 있던 SignInActivity 로 넘어간다.
-
-# activity_main_xml 와 activity_sign_up_xml
-![Untitled (5)](https://user-images.githubusercontent.com/97952129/162616249-8076aaec-b98b-41c5-a2a7-a58337a1e0c7.png)
-
-
-- hint 속성을 사용하여 미리보기 글씨를 나타내었다.
-- inputType 속성을 사용하였고 “textPassword” 로 입력내용을 가렸다.
-
+- SharedPreferences 를 사용하여 자동 로그인을 구현
+    
+     -key-value 를 이용하여 간단한 데이터 저장이 가능한 DB
+    
+    ### SOPTSharedPreferences.kt
+    
+    ```kotlin
+    object SOPTSharedPreferences {
+        private const val STORAGE_KEY = "USER_AUTH"
+        private const val AUTO_LOGIN = "AUTO_LOGIN"
+    
+        fun init(context: Context):SharedPreferences{
+            return context.getSharedPreferences(STORAGE_KEY, Context.MODE_PRIVATE) //shared 에 있는 STORAGE_KEY 데이터를 불러옴
+    	//MODE_PRIVATE 앱 안 어디에서든지 불러올 수 있는 상태
+        }
+    
+    //로그인
+        //파일 읽기
+        fun getAutoLogin(context: Context):Boolean{
+            return init(context).getBoolean(AUTO_LOGIN, false)
+        }
+    
+        //파일 쓰기
+        fun setAutoLogin(context: Context,value: Boolean){
+            init(context).edit() //파일 수정
+                .putBoolean(AUTO_LOGIN, value) 
+                .apply()
+        }
+    
+    //로그아웃
+        fun setLogout(context: Context): Boolean{
+            init(context).edit() //파일 수정
+                .remove(AUTO_LOGIN) //key 값에 해당하는 value 삭제
+                .clear() //모든 값을 지움
+                .apply()
+    
+            return init(context).getBoolean(AUTO_LOGIN, false)
+        }
+    
+    }
+    ```
+    
 
 ---
 
-https://user-images.githubusercontent.com/97952129/162616272-1c7f6851-d7ab-4963-be4b-e53fe579f344.mp4
+### SignInActivity.kt
 
+```kotlin
+private fun initClickEvent(){
+     binding.ivSignInCheckbox.setOnClickListener{
+         binding.ivSignInCheckbox.isSelected=!binding.ivSignInCheckbox.isSelected // 버튼 클릭 여부에 따라 selector 변환
+SOPTSharedPreferences.setAutoLogin(this,binding.ivSignInCheckbox.isSelected)
+//체크 되면 true, SharedPreferences에 저장
+}
 
-# activity_home_xml
-![Untitled (6)](https://user-images.githubusercontent.com/97952129/162616300-631aabd9-e334-4379-b968-6ab6b330ef16.png)
+}
 
+private fun isAutoLogin() {
+     if(SOPTSharedPreferences.getAutoLogin(this)){
+showToast("자동로그인 되었습니다")
+         startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+         finish() // 저장된 값 true 면 HomeActivity로 이동
+     }
+ }
+```
 
-- ScrollView를 구현하기 위해 전체 레이아웃을 ConstraintLayout 으로 설정하고 ScrollView 안에 ConstraintLayout 을 구현해주었다.
-- src 속성을 사용하여 사진을 넣어주었다.
-- constraintDimensionRatio 속성을 사용하여 사진의 비율을 1:1 로 맞춰준다.
+### activity_main.xml
 
+```xml
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/iv_signIn_checkbox"
+    android:background="@drawable/select_checkbox"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_marginEnd="100dp"
+    android:layout_marginTop="25dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/mainImage" />
 
-https://user-images.githubusercontent.com/97952129/162616326-085dce5f-d0ed-4a54-a75c-cbc8d9e8b514.mp4
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="170dp"
+    android:layout_marginEnd="25dp"
+    android:fontFamily="@font/noto_sans_medium_kr"
+    android:text="@string/auto_login"
+    android:textColor="@color/black"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+```
 
+  
 
+### select_checkbox.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_checkbox_off" android:state_selected="false" />
+    <item android:drawable="@drawable/ic_checkbox_on" android:state_selected="true" />
+</selector>
+```
+
+- SignInActivity에 자동로그인 로직 구현
+    
+       - 자동로그인 버튼 배치 (activity_main.xml)
+    
+       - selector 함수를 사용하여 클릭 여부에 따른 이미지 변화 (select_checkbox.xml)
+    
+       - isSelected 값에 따라 자동로그인 구현(SignInActivity.kt)
+    
+
+---
+
+# ✔️ 필수과제_자동 로그인 해제
+
+- 프로필 화면에서 설정 버튼을 누르면 SettingActivity 로 이동
+- 자동로그인 버튼을 누르면 자동로그인 해제 및 SignInActivity 로 이동
+
+ 
+
+### ProfileFragment.kt
+
+```kotlin
+private fun settingClickEvent(){
+    _binding?.btnProfileSetting?.setOnClickListener{
+val intent = Intent(activity, SettingActivity::class.java)
+            startActivity(intent)
+	}
+}
+```
+
+  - Fragment 에서 Activity 로 이동
+
+ - Fragment 에서는 Context 를 못받아오기 때문에 Intent(this 가아니라 Intent(activity 로 해주기
+
+### SettingActivity.kt
+
+```kotlin
+class SettingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySettingBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        isAutoLogout()
+    }
+
+//자동 로그인
+    private fun isAutoLogout() {
+        binding.btnSettingLogout.setOnClickListener{ // 자동로그인 해제 버튼 눌렀을 때
+SOPTSharedPreferences.setLogout(this) //setLogout() 
+						showToast("자동 로그인 해제")
+            startActivity(Intent(this@SettingActivity, SignInActivity::class.java)) //SignInActivity 로 이동
+            finish()
+	}
+}
+
+```
+
+---
+
+# ✔️ 성장과제_온보딩 화면 구현하기
+
+- NavigationComponent 를 사용하여 Fragment 간의 전환을 보다 더 간단하고 안정적이게 함
+- Fragment 간 어떻게 교체가 이루어지는지 drag&drop 을 통해 Navigation Graph 에 작성
+    
+    ![스크린샷 2022-06-10 오후 5.56.07.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3acfa5e5-b004-49e6-af81-166ae6b5ed01/스크린샷_2022-06-10_오후_5.56.07.png)
+    
+
+### nav_sample.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_sample"
+    app:startDestination="@id/sampleFragment1"> //처음 시작
+
+    <fragment
+        android:id="@+id/sampleFragment1"
+        android:name="com.example.sopt_main.ui.fragment.onboarding.SampleFragment1"
+        android:label="fragment_sample1"
+        tools:layout="@layout/fragment_sample1" >
+        <action 
+            android:id="@+id/action_sampleFragment1_to_sampleFragment2"
+            app:destination="@id/sampleFragment2" /> // 이동
+    </fragment>
+    <fragment
+        android:id="@+id/sampleFragment2"
+        android:name="com.example.sopt_main.ui.fragment.onboarding.SampleFragment2"
+        android:label="fragment_sample2"
+        tools:layout="@layout/fragment_sample2" >
+        <action
+            android:id="@+id/action_sampleFragment2_to_sampleFragment3"
+            app:destination="@id/sampleFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/sampleFragment3"
+        android:name="com.example.sopt_main.ui.fragment.onboarding.SampleFragment3"
+        android:label="fragment_sample3"
+        tools:layout="@layout/fragment_sample3" />
+</navigation>
+```
+
+### SampleFragment1.kt
+
+ 
+
+```kotlin
+binding.btnNext.setOnClickListener{
+findNavController().navigate(R.id.action_sampleFragment1_to_sampleFragment2)
+}
+```
+
+ 
+
+- 위와 같은 함수를 추가해주면 fragment 간의 이동 구현
+- navigate(이동할 Destination Id 또는 Action Id)
+
+---
+
+# ✔️ 그 외
+
+- 확장함수를 활용한 showToast()
+- 로그인과 회원가입 서버통신을 확장함수 사용해보기
+
+### SignInActivity.kt
+
+```kotlin
+private fun isAutoLogin() {
+        if(SOPTSharedPreferences.getAutoLogin(this)){
+            showToast("자동로그인 되었습니다") //확장함수 사용
+            startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            finish()
+        }
+    }
+
+//확장함수
+    fun Context.showToast(msg:String){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+    }
+```
+
+### ResponseType.kt
+
+```kotlin
+fun <ResponseType> Call<ResponseType>.enqueueUtil(
+    onSuccess: (ResponseType) -> Unit,
+    onError : ((stateCode:Int) -> Unit)? = null
+){
+    this.enqueue(object : Callback<ResponseType> {
+        override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
+            if(response.isSuccessful){
+                onSuccess.invoke(response.body() ?: return)
+            }else {
+                onError?.invoke(response.code())
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseType>, t: Throwable) {
+            Log.d("NetworkTest","error:$t")
+        }
+    })
+}
+```
+
+### SignInActivity.kt
+
+```kotlin
+private fun loginNetwork(){
+    val requestSignIn = RequestSignIn(
+        email = binding.mainEditId.text.toString(),
+        password = binding.mainEditPwd.text.toString()
+    )
+
+    val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
+
+//확장함수를 활용
+    call.enqueueUtil(
+        onSuccess ={
+Toast.makeText(this@SignInActivity,"${it.data?.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+},
+        onError ={
+Toast.makeText(this@SignInActivity,"로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@SignInActivity,"onresponse else", Toast.LENGTH_SHORT).show()
+}
+)
+}
+```
+
+## 실행화면
+
+https://user-images.githubusercontent.com/97952129/173033891-00585299-1ec3-4d12-8e40-432ae2eb1d46.mov
