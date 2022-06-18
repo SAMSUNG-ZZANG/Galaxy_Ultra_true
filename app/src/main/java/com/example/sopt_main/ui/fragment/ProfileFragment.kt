@@ -1,5 +1,6 @@
 package com.example.sopt_main.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.TestViewPagerAdaptor
 import com.example.sopt_main.databinding.FragmentProfileBinding
+import com.example.sopt_main.ui.activity.SettingActivity
 
 
 class ProfileFragment : Fragment() {
@@ -18,6 +20,7 @@ class ProfileFragment : Fragment() {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var testViewPagerAdaptor: TestViewPagerAdaptor
+
 
 
 
@@ -31,6 +34,7 @@ class ProfileFragment : Fragment() {
         binding.homeRepoBtn.isSelected =false
         transactionFragment()
         initImage()
+        settingClickEvent()
 
         return binding.root
     }
@@ -69,6 +73,13 @@ class ProfileFragment : Fragment() {
             .circleCrop()
             .into(binding.imageView)
 
+    }
+
+    private fun settingClickEvent(){
+        _binding?.btnProfileSetting?.setOnClickListener{
+                val intent = Intent(activity, SettingActivity::class.java)
+                startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

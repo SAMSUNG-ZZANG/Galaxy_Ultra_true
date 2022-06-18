@@ -12,7 +12,7 @@ import com.example.sopt_main.databinding.FragmentSample1Binding
 class SampleFragment1 : Fragment(){
 
     private var _binding : FragmentSample1Binding? = null
-    private val binding get() = _binding ?: error("Bidnding 이 초기화 되지 않았습니다.")
+    private val binding get() = _binding ?: error("Binding 이 초기화 되지 않았습니다.")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,7 @@ class SampleFragment1 : Fragment(){
         binding.btnNext.setOnClickListener{
             findNavController().navigate(R.id.action_sampleFragment1_to_sampleFragment2)
         }
-
+1
         return binding.root
     }
 

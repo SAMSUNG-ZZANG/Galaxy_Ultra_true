@@ -1,4 +1,4 @@
-package com.example.sopt_main.Server.response
+package com.example.sopt_main.server.response
 
 data class ResponseFollowerInfo(
 
