@@ -14,6 +14,7 @@ interface SoptService {
         @Body body: RequestSignIn
     ): Call<ResponseSignIn>
 
+
     @POST("auth/signup")
     fun postSignUp(
         @Body body: RequestSignUp
