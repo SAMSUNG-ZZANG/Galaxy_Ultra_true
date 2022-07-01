@@ -14,6 +14,7 @@ import com.example.sopt_main.server.ServiceCreator
 import com.example.sopt_main.databinding.ActivityMainBinding
 import com.example.sopt_main.enqueueUtil
 import com.example.sopt_main.util.SOPTSharedPreferences
+import com.example.sopt_main.util.showToast
 import retrofit2.Call
 
 class SignInActivity : AppCompatActivity() {
@@ -62,12 +63,12 @@ class SignInActivity : AppCompatActivity() {
 
         call.enqueueUtil(
             onSuccess = {
-                    Toast.makeText(this@SignInActivity,"${it.data?.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                showToast("${it.data?.email}님 반갑습니다!")
                     startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
             },
             onError = {
-                Toast.makeText(this@SignInActivity,"로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this@SignInActivity,"onresponse else", Toast.LENGTH_SHORT).show()
+                showToast("로그인에 실패하셨습니다.")
+                showToast("onresponse else")
             }
         )
     }
@@ -89,8 +90,5 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    fun Context.showToast(msg:String){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
-    }
 
 }

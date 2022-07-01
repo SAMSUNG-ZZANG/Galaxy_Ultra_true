@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.sopt_main.databinding.ActivitySettingBinding
 import com.example.sopt_main.util.SOPTSharedPreferences
+import com.example.sopt_main.util.showToast
 
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
@@ -30,7 +31,5 @@ class SettingActivity : AppCompatActivity() {
     }
 
 
-    fun Context.showToast(msg:String){
-        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
-    }
+
 }
