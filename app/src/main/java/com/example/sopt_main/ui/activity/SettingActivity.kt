@@ -5,18 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.sopt_main.R
+import com.example.sopt_main.base.BaseActivity
 import com.example.sopt_main.databinding.ActivitySettingBinding
 import com.example.sopt_main.util.SOPTSharedPreferences
 import com.example.sopt_main.util.showToast
 
-class SettingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
+class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_setting) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         isAutoLogout()
     }

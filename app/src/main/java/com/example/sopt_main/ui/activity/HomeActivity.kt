@@ -1,27 +1,22 @@
 package com.example.sopt_main.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sopt_main.ui.fragment.HomeFragment
 import com.example.sopt_main.R
 import com.example.sopt_main.ui.fragment.TestFragment3
 import com.example.sopt_main.adapter.TestViewPagerAdaptor
+import com.example.sopt_main.base.BaseActivity
 import com.example.sopt_main.databinding.ActivityHomeBinding
-import com.example.sopt_main.server.GithubService
 import com.example.sopt_main.ui.fragment.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
-    private lateinit var homeBinding : ActivityHomeBinding
+class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private lateinit var testViewPagerAdaptor: TestViewPagerAdaptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeBinding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(homeBinding.root)
 
         initAdaptor()
         initBottomNavi()
@@ -32,28 +27,28 @@ class HomeActivity : AppCompatActivity() {
         testViewPagerAdaptor = TestViewPagerAdaptor(this)
         testViewPagerAdaptor.fragments.addAll(fragmentList)
 
-        homeBinding.homeVp.adapter = testViewPagerAdaptor
+        binding.homeVp.adapter = testViewPagerAdaptor
     }
 
     private fun initBottomNavi(){
-        homeBinding.homeVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        binding.homeVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
-                homeBinding.homeBnv.menu.getItem(position).isChecked = true
+                binding.homeBnv.menu.getItem(position).isChecked = true
             }
         })
 
-        homeBinding.homeBnv.setOnItemSelectedListener {
+        binding.homeBnv.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.menu_android -> {
-                    homeBinding.homeVp.currentItem = FIRST_FRAGMENT
+                    binding.homeVp.currentItem = FIRST_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
                 R.id.menu_list -> {
-                    homeBinding.homeVp.currentItem = SECOND_FRAGMENT
+                    binding.homeVp.currentItem = SECOND_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
                 else -> {
-                    homeBinding.homeVp.currentItem = THIRD_FRAGMENT
+                    binding.homeVp.currentItem = THIRD_FRAGMENT
                     return@setOnItemSelectedListener true
                 }
             }
