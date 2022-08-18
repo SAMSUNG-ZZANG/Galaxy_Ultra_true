@@ -28,10 +28,10 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22317901611328128" />
-        <entry key="app/src/main/res/layout/activity_nav_host.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_nav_host.xml" value="0.321356201171875" />
         <entry key="app/src/main/res/layout/activity_seminar_main.xml" value="0.1070110701107011" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.27927703857421876" />
         <entry key="app/src/main/res/layout/follower_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />

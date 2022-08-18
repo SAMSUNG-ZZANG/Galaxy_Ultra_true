@@ -8,8 +8,12 @@ import com.example.sopt_main.R
 import com.example.sopt_main.ui.fragment.TestFragment3
 import com.example.sopt_main.adapter.TestViewPagerAdaptor
 import com.example.sopt_main.databinding.ActivityHomeBinding
+import com.example.sopt_main.server.GithubService
 import com.example.sopt_main.ui.fragment.ProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private lateinit var homeBinding : ActivityHomeBinding
     private lateinit var testViewPagerAdaptor: TestViewPagerAdaptor

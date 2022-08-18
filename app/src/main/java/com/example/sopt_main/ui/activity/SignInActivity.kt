@@ -1,29 +1,26 @@
 package com.example.sopt_main.ui.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.sopt_main.server.request.RequestSignIn
-import com.example.sopt_main.server.response.ResponseSignIn
-import com.example.sopt_main.server.ServiceCreator
+import androidx.activity.viewModels
 import com.example.sopt_main.databinding.ActivityMainBinding
-import com.example.sopt_main.enqueueUtil
+import com.example.sopt_main.ui.viewmodel.SignInViewModel
 import com.example.sopt_main.util.SOPTSharedPreferences
 import com.example.sopt_main.util.showToast
-import retrofit2.Call
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.viewModel = viewModel
         setContentView(binding.root)
 
         val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -43,52 +40,33 @@ class SignInActivity : AppCompatActivity() {
 
         initEvent()
         initClickEvent()
-        isAutoLogin()
+        loginNetwork()
 
     }
 
     private fun initEvent(){
         binding.mainLoginBtn.setOnClickListener{
-            loginNetwork()
+           viewModel.signIn()
         }
     }
 
     private fun loginNetwork(){
-        val requestSignIn = RequestSignIn(
-            email = binding.mainEditId.text.toString(),
-            password = binding.mainEditPwd.text.toString()
-        )
-
-        val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
-
-        call.enqueueUtil(
-            onSuccess = {
-                showToast("${it.data?.email}님 반갑습니다!")
-                    startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
-            },
-            onError = {
+        viewModel.successLogin.observe(this) { isSuccessLogin ->
+            if (isSuccessLogin == true) {
+                showToast("${viewModel.email.value}님 반갑습니다!")
+                startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            } else if (isSuccessLogin == false) {
                 showToast("로그인에 실패하셨습니다.")
-                showToast("onresponse else")
             }
-        )
+        }
     }
 
     private fun initClickEvent(){
         binding.ivSignInCheckbox.setOnClickListener{
             binding.ivSignInCheckbox.isSelected =!binding.ivSignInCheckbox.isSelected
-            SOPTSharedPreferences.setAutoLogin(this,binding.ivSignInCheckbox.isSelected)
+            SOPTSharedPreferences.setAutoLogin(this, binding.ivSignInCheckbox.isSelected)
         }
 
     }
-
-   private fun isAutoLogin() {
-        if(SOPTSharedPreferences.getAutoLogin(this)){
-            showToast("자동로그인 되었습니다")
-            startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
-            finish()
-        }
-    }
-
-
 
 }

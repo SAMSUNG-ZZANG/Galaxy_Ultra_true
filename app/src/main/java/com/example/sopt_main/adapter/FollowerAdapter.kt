@@ -11,8 +11,7 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
     var followerList = mutableListOf<ResponseFollowerInfo>()
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): FollowerViewHolder {
-        val binding =
-                FollowerListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = FollowerListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return  FollowerViewHolder(binding)
     }
 

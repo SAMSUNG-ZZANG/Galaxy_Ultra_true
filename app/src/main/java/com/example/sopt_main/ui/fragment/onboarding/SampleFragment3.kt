@@ -12,8 +12,11 @@ import com.example.sopt_main.R
 import com.example.sopt_main.adapter.FollowerAdapter
 import com.example.sopt_main.databinding.FragmentFollowerBinding
 import com.example.sopt_main.databinding.FragmentSample3Binding
+import com.example.sopt_main.ui.activity.HomeActivity
 import com.example.sopt_main.ui.activity.SettingActivity
 import com.example.sopt_main.ui.activity.SignInActivity
+import com.example.sopt_main.util.SOPTSharedPreferences
+import com.example.sopt_main.util.showToast
 
 class SampleFragment3 : Fragment() {
 
@@ -42,8 +45,18 @@ class SampleFragment3 : Fragment() {
 
     private fun btnClickEvent(){
         _binding?.btnNext?.setOnClickListener{
-            val intent = Intent(activity, SignInActivity::class.java)
-            startActivity(intent)
+            isAutoLogin()
+        }
+    }
+
+    private fun isAutoLogin() {
+        if(SOPTSharedPreferences.getAutoLogin(requireContext())){
+            requireContext().showToast("자동로그인 되었습니다")
+            startActivity(Intent(requireActivity(), HomeActivity::class.java))
+            requireActivity().finish()
+        } else {
+            startActivity(Intent(requireActivity(), SignInActivity::class.java))
+            requireActivity().finish()
         }
     }
 
