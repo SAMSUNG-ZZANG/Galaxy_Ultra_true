@@ -6,15 +6,19 @@ import com.example.sopt_main.server.response.ResponseSignIn
 import com.example.sopt_main.server.response.ResponseSignUp
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface SoptService {
-    @POST("auth/signin")
+    @Headers("Content-Type:application/json")
+    @POST("user/login")
     fun postLogin(
         @Body body: RequestSignIn
     ): Call<ResponseSignIn>
 
-    @POST("auth/signup")
+    @Headers("Content-Type:application/json")
+    @POST("user/signup")
     fun postSignUp(
         @Body body: RequestSignUp
     ): Call<ResponseSignUp>

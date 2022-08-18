@@ -24,7 +24,7 @@ object NetworkModule {
     annotation class GithubRetrofit
 
     private const val GITHUB_URL = "https://api.github.com/"
-    private const val SOPT_URL = "http://13.124.62.236/"
+    private const val SOPT_URL = "https://asia-northeast3-we-sopt-29.cloudfunctions.net/api/"
 
     @Provides
     @Singleton
