@@ -227,6 +227,7 @@ findNavController().navigate(R.id.action_sampleFragment1_to_sampleFragment2)
 - navigate(이동할 Destination Id 또는 Action Id)
 
 ---
+=======
 
 # ✔️ 그 외
 
