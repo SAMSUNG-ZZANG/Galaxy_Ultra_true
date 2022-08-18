@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.FollowerAdapter
+import com.example.sopt_main.base.BaseFragment
 import com.example.sopt_main.databinding.FragmentFollowerBinding
 import com.example.sopt_main.databinding.FragmentSample3Binding
 import com.example.sopt_main.ui.activity.HomeActivity
@@ -18,22 +19,13 @@ import com.example.sopt_main.ui.activity.SignInActivity
 import com.example.sopt_main.util.SOPTSharedPreferences
 import com.example.sopt_main.util.showToast
 
-class SampleFragment3 : Fragment() {
+class SampleFragment3 : BaseFragment<FragmentSample3Binding>(R.layout.fragment_sample3) {
 
-    private var _binding : FragmentSample3Binding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSample3Binding.inflate(layoutInflater,container,false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initImage()
         btnClickEvent()
-
-        return binding.root
     }
 
     private  fun initImage(){
@@ -44,7 +36,7 @@ class SampleFragment3 : Fragment() {
     }
 
     private fun btnClickEvent(){
-        _binding?.btnNext?.setOnClickListener{
+        binding.btnNext.setOnClickListener{
             isAutoLogin()
         }
     }
