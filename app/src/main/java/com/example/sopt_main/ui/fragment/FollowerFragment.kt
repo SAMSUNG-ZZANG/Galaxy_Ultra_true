@@ -1,70 +1,49 @@
 package com.example.sopt_main.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.sopt_main.server.GithubServiceCreator
-import com.example.sopt_main.server.response.ResponseFollowerInfo
 import com.example.sopt_main.adapter.FollowerAdapter
 import com.example.sopt_main.databinding.FragmentFollowerBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.sopt_main.ui.viewmodel.FollowerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FollowerFragment : Fragment() {
-
     private lateinit var followerAdapter: FollowerAdapter
+    private val viewModel: FollowerViewModel by viewModels()
     private var _binding : FragmentFollowerBinding? = null
     private val binding get() = _binding!!
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFollowerBinding.inflate(layoutInflater,container,false)
-
-
-        followerUserNetwork()
         binding.rvFollower.addItemDecoration(DividerItemDecoration(context,1)) // 구분선 설정
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.fetchFollowers()
+        followerUserNetwork()
+    }
+
 
     private fun followerUserNetwork(){
-
-        val call: Call<List<ResponseFollowerInfo>> = GithubServiceCreator.githubService.getUserInfo("jinsilWoo")
-
-        call.enqueue(object : Callback<List<ResponseFollowerInfo>> {
-
-                override fun onResponse(
-                    call: Call<List<ResponseFollowerInfo>>,
-                    response: Response<List<ResponseFollowerInfo>>
-                ) {
-                    val data = response.body()
-
-                    followerAdapter = FollowerAdapter()
-                    _binding?.rvFollower?.adapter = followerAdapter
-
-                    if (data != null) {
-                        followerAdapter.followerList = data.toMutableList()
-                    }
-                    followerAdapter.notifyDataSetChanged()
-
-
-                }
-
-                override fun onFailure(call: Call<List<ResponseFollowerInfo>>, t: Throwable) {
-                    Log.e("GitHubTest", "error:$t")
-                }
+        viewModel.followerList.observe(viewLifecycleOwner) {
+            followerAdapter = FollowerAdapter()
+            _binding?.rvFollower?.adapter = followerAdapter
+            if (it != null) {
+                followerAdapter.followerList = it.toMutableList()
             }
-        )
+            followerAdapter.notifyDataSetChanged()
+        }
     }
 
 
@@ -86,11 +65,6 @@ class FollowerFragment : Fragment() {
 //        followerAdapter.notifyDataSetChanged()
 //
 //    }
-
-
-
-
-
 
 
         override fun onDestroyView() {
