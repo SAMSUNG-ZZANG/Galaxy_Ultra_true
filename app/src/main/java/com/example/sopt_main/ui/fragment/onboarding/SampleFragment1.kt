@@ -12,6 +12,7 @@ import com.example.sopt_main.databinding.FragmentSample1Binding
 
 class SampleFragment1 : BaseFragment<FragmentSample1Binding>(R.layout.fragment_sample1) {
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNext.setOnClickListener {
