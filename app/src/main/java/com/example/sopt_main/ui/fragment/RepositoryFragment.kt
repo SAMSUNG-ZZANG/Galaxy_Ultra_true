@@ -6,31 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.sopt_main.R
 import com.example.sopt_main.adapter.RepositoryAdaptor
+import com.example.sopt_main.base.BaseFragment
 import com.example.sopt_main.data.RepositoryData
 import com.example.sopt_main.databinding.FragmentRepositoryBinding
 
 
-class RepositoryFragment : Fragment() {
+class RepositoryFragment : BaseFragment<FragmentRepositoryBinding>(R.layout.fragment_repository) {
 
     private lateinit var repoAdaptor: RepositoryAdaptor
-    private var _binding : FragmentRepositoryBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?{
-        _binding = FragmentRepositoryBinding.inflate(layoutInflater,container,false)
-        binding.rvFollower.addItemDecoration(DividerItemDecoration(context,1))
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initFollowerAdaptor()
-        return binding.root
-    }
 
+    }
     private fun initFollowerAdaptor(){
         repoAdaptor = RepositoryAdaptor()
-        _binding?.rvFollower?.adapter = repoAdaptor
+        binding.rvFollower.adapter = repoAdaptor
 
         repoAdaptor.repoList.addAll(
             listOf(
@@ -44,10 +40,4 @@ class RepositoryFragment : Fragment() {
         repoAdaptor.notifyDataSetChanged()
 
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

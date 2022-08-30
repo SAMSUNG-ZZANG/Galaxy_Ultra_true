@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.example.sopt_main.R
+import com.example.sopt_main.base.BaseActivity
 import com.example.sopt_main.databinding.ActivityMainBinding
 import com.example.sopt_main.ui.viewmodel.SignInViewModel
 import com.example.sopt_main.util.SOPTSharedPreferences
@@ -13,21 +15,18 @@ import com.example.sopt_main.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+class SignInActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         binding.viewModel = viewModel
-        setContentView(binding.root)
 
         val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == Activity.RESULT_OK){
-                val id = result.data?.getStringExtra("id")
-                val password = result.data?.getStringExtra("pwd")
+                val id = result.data?.getStringExtra("id") ?: ""
+                val password = result.data?.getStringExtra("pwd") ?: ""
                 binding.mainEditId.setText(id)
                 binding.mainEditPwd.setText(password)
             }

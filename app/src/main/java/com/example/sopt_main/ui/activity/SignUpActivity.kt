@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.example.sopt_main.R
+import com.example.sopt_main.base.BaseActivity
 import com.example.sopt_main.server.request.RequestSignUp
 import com.example.sopt_main.server.response.ResponseSignUp
 import com.example.sopt_main.server.ServiceCreator
@@ -16,15 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 
 @AndroidEntryPoint
-class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySignUpBinding
+class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private val viewModel: SignUpViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
         binding.signUpViewModel = viewModel
-        setContentView(binding.root)
 
         binding.signUpSetBtn.setOnClickListener {
             if (viewModel.checkInput()) {

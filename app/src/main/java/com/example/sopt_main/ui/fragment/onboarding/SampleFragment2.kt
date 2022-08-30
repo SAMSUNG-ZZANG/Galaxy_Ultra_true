@@ -7,31 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.sopt_main.R
+import com.example.sopt_main.base.BaseFragment
 import com.example.sopt_main.databinding.FragmentSample2Binding
 
 
-class SampleFragment2 : Fragment() {
+class SampleFragment2 : BaseFragment<FragmentSample2Binding>(R.layout.fragment_sample2) {
 
-    private var _binding : FragmentSample2Binding? = null
-    private val binding get() = _binding ?: error("Bidnding 이 초기화 되지 않았습니다.")
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSample2Binding.inflate(layoutInflater,container,false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.btnNext.setOnClickListener{
             findNavController().navigate(R.id.action_sampleFragment2_to_sampleFragment3)
         }
-
-        return binding.root
-    }
-
-    override fun onDestroyView()
-    {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

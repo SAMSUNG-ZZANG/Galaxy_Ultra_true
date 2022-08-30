@@ -8,33 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.TabViewPagerAdaptor
+import com.example.sopt_main.base.BaseFragment
 import com.example.sopt_main.databinding.FragmentHomeBinding
 import com.example.sopt_main.ui.activity.SettingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private var _binding : FragmentHomeBinding? = null
-    private val binding get() = _binding!!
     private lateinit var tabViewPagerAdaptor: TabViewPagerAdaptor
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initAdaptor()
         initTabLayout()
-
-        return binding.root
-
     }
 
-
-
-
-    private fun initAdaptor(){
+    private fun initAdaptor() {
         val fragmentList = listOf(TabFollowerFragment(), TabFollowingFragment())
 
         tabViewPagerAdaptor = TabViewPagerAdaptor(this)
@@ -43,18 +33,14 @@ class HomeFragment : Fragment() {
         binding.homeVp.adapter = tabViewPagerAdaptor
     }
 
-    private fun initTabLayout(){
+    private fun initTabLayout() {
 
-        val tabLabel = resources.getStringArray(R.array.follower_list) //
+        val tabLabel = resources.getStringArray(R.array.follower_list)
 
-        TabLayoutMediator(binding.homeTap, binding.homeVp) {tab, position ->
+        TabLayoutMediator(binding.homeTap, binding.homeVp) { tab, position ->
             tab.text = tabLabel[position]
         }.attach()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 }

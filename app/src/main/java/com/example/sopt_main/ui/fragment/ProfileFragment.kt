@@ -11,32 +11,22 @@ import androidx.fragment.app.replace
 import com.bumptech.glide.Glide
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.TestViewPagerAdaptor
+import com.example.sopt_main.base.BaseFragment
 import com.example.sopt_main.databinding.FragmentProfileBinding
 import com.example.sopt_main.ui.activity.SettingActivity
 
 
-class ProfileFragment : Fragment() {
-
-    private var _binding : FragmentProfileBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var testViewPagerAdaptor: TestViewPagerAdaptor
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
 
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.homeFollowerBtn.isSelected =true
         binding.homeRepoBtn.isSelected =false
         transactionFragment()
         initImage()
         settingClickEvent()
-
-        return binding.root
     }
 
 
@@ -76,14 +66,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun settingClickEvent(){
-        _binding?.btnProfileSetting?.setOnClickListener{
+        binding.btnProfileSetting.setOnClickListener{
                 val intent = Intent(activity, SettingActivity::class.java)
                 startActivity(intent)
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }
