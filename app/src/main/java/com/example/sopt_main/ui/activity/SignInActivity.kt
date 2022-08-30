@@ -25,8 +25,8 @@ class SignInActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
         val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == Activity.RESULT_OK){
-                val id = result.data?.getStringExtra("id")
-                val password = result.data?.getStringExtra("pwd")
+                val id = result.data?.getStringExtra("id") ?: ""
+                val password = result.data?.getStringExtra("pwd") ?: ""
                 binding.mainEditId.setText(id)
                 binding.mainEditPwd.setText(password)
             }
