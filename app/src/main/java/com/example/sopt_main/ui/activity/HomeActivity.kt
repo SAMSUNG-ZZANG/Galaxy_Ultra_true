@@ -60,8 +60,5 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         const val FIRST_FRAGMENT = 0
         const val SECOND_FRAGMENT = 1
         const val THIRD_FRAGMENT = 2
-
     }
-
-
 }

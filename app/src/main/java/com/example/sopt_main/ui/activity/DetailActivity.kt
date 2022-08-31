@@ -12,9 +12,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
-
     }
 
 

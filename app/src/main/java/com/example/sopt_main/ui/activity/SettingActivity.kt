@@ -27,7 +27,4 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
             finish()
         }
     }
-
-
-
 }
