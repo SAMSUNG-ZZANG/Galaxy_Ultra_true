@@ -1,4 +1,4 @@
-package com.example.sopt_main
+package com.example.sopt_main.util
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

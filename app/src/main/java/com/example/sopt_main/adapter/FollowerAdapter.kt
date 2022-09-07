@@ -2,10 +2,9 @@ package com.example.sopt_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.sopt_main.MyItemTouchHelperCallBack
+import com.example.sopt_main.util.MyItemTouchHelperCallBack
 import com.example.sopt_main.databinding.FollowerListBinding
 import com.example.sopt_main.server.response.ResponseFollowerInfo
 

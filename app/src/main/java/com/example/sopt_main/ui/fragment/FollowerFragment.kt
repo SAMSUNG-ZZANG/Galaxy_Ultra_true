@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.example.sopt_main.MyItemTouchHelperCallBack
-import com.example.sopt_main.MyItemTouchHelperCallBack.ItemTouchHelperListener
+import com.example.sopt_main.util.MyItemTouchHelperCallBack
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.FollowerAdapter
 import com.example.sopt_main.base.BaseFragment
