@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sopt_main.MyItemTouchHelperCallBack
+import com.example.sopt_main.MyItemTouchHelperCallBack.ItemTouchHelperListener
 import com.example.sopt_main.R
 import com.example.sopt_main.adapter.FollowerAdapter
 import com.example.sopt_main.base.BaseFragment
@@ -26,6 +30,8 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(R.layout.fragment
         itemClickEvent()
         viewModel.fetchFollowers()
         followerUserNetwork()
+        initRecyclerView()
+
     }
 
 
@@ -51,8 +57,15 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(R.layout.fragment
                     startActivity(intent)
                 }
             })
+    }
 
+    private fun initRecyclerView() {
 
+        val itemTouchHelperCallback = followerAdapter?.let { MyItemTouchHelperCallBack(it) }
+
+        val helper = itemTouchHelperCallback?.let { ItemTouchHelper(it) }
+
+        helper?.attachToRecyclerView(binding.rvFollower)
 
     }
 }

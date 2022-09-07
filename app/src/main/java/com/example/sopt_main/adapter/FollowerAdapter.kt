@@ -2,12 +2,15 @@ package com.example.sopt_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.sopt_main.MyItemTouchHelperCallBack
 import com.example.sopt_main.databinding.FollowerListBinding
 import com.example.sopt_main.server.response.ResponseFollowerInfo
 
-class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
+class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(),
+    MyItemTouchHelperCallBack.ItemTouchHelperListener {
 
     var followerList = mutableListOf<ResponseFollowerInfo>()
     private var itemClickListener: OnItemClickListener? = null
@@ -48,4 +51,22 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
                 .into(binding.followerProfile)
         }
     }
+
+    override fun onItemMoved(fromPosition: Int, toPosition: Int): Boolean {
+        val follower = followerList[fromPosition]
+        // 리스트 갱신
+        followerList.removeAt(fromPosition)
+        followerList.add(toPosition, follower)
+
+        // fromPosition에서 toPosition으로 아이템 이동 공지
+        notifyItemMoved(fromPosition, toPosition)
+        return true
+    }
+
+    override fun onItemSwiped( position: Int) {
+
+    }
+
+
+
 }
