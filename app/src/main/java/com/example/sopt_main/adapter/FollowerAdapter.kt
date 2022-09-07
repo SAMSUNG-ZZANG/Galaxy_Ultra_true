@@ -64,7 +64,8 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
     }
 
     override fun onItemSwiped( position: Int) {
-
+        followerList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 

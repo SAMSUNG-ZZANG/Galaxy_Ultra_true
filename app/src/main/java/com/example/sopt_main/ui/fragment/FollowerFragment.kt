@@ -60,7 +60,6 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(R.layout.fragment
     }
 
     private fun initRecyclerView() {
-
         val itemTouchHelperCallback = followerAdapter?.let { MyItemTouchHelperCallBack(it) }
 
         val helper = itemTouchHelperCallback?.let { ItemTouchHelper(it) }
