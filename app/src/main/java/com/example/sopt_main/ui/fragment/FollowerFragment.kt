@@ -58,10 +58,13 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(R.layout.fragment
     }
 
     private fun initRecyclerView() {
+        //리스너를 구현한 Adapter 클래스를 Callback 클래스의 생성자로 지정
         val itemTouchHelperCallback = followerAdapter?.let { MyItemTouchHelperCallBack(it) }
 
+        //ItemTouchHelper의 생성자로 ItemTouchHelper.Callback 객체 설정
         val helper = itemTouchHelperCallback?.let { ItemTouchHelper(it) }
 
+        //RecyclerView에 ItemTouchHelper 연결
         helper?.attachToRecyclerView(binding.rvFollower)
 
     }
