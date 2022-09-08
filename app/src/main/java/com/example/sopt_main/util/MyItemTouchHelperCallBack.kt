@@ -3,7 +3,7 @@ package com.example.sopt_main.util
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class MyItemTouchHelperCallBack(val onItemTouchHelper: ItemTouchHelperListener) :
+class MyItemTouchHelperCallBack(val listener: ItemTouchHelperListener) :
     ItemTouchHelper.Callback() {
 
     interface ItemTouchHelperListener {
@@ -25,11 +25,11 @@ class MyItemTouchHelperCallBack(val onItemTouchHelper: ItemTouchHelperListener) 
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        return onItemTouchHelper.onItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+        return listener.onItemMoved(viewHolder.adapterPosition, target.adapterPosition)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        onItemTouchHelper.onItemSwiped(viewHolder.adapterPosition)
+        listener.onItemSwiped(viewHolder.adapterPosition)
     }
 
 
