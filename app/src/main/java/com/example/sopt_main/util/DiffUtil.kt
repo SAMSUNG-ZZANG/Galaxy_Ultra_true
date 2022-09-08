@@ -20,5 +20,5 @@ class DiffUtil(private val oldList: List<Any>, private val newList: List<Any>) :
 
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition] == newList[newItemPosition])
+        oldList[oldItemPosition] == newList[newItemPosition]
 }
