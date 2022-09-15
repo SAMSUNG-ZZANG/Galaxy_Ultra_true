@@ -2,13 +2,15 @@ package com.example.sopt_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sopt_main.util.MyItemTouchHelperCallBack
 import com.example.sopt_main.databinding.FollowerListBinding
 import com.example.sopt_main.server.response.ResponseFollowerInfo
+import com.example.sopt_main.util.DiffUtil
 
-class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(),
+class FollowerAdapter : ListAdapter<ResponseFollowerInfo,FollowerAdapter.FollowerViewHolder>(DiffUtil<ResponseFollowerInfo>()),
     MyItemTouchHelperCallBack.ItemTouchHelperListener {
 
     var followerList = mutableListOf<ResponseFollowerInfo>()
@@ -30,14 +32,13 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
     }
 
     override fun onBindViewHolder(holder: FollowerViewHolder, position: Int) {
-        holder.onBind(followerList[position])
+        holder.onBind(getItem(position))
         holder.itemView.setOnClickListener {
-            itemClickListener?.onClick(followerList[position])
+            itemClickListener?.onClick(getItem(position))
         }
 
     }
 
-    override fun getItemCount(): Int = followerList.size
 
     class FollowerViewHolder(
         private val binding: FollowerListBinding
@@ -66,6 +67,7 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
         followerList.removeAt(position)
         notifyItemRemoved(position)
     }
+
 
 
 

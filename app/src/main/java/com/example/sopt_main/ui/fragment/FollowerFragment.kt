@@ -38,7 +38,7 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(R.layout.fragment
             if (it != null) {
                 followerAdapter?.followerList = it.toMutableList()
             }
-            followerAdapter?.notifyDataSetChanged()
+            followerAdapter?.submitList(it)
         }
     }
 
