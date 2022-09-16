@@ -55,8 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:paddingTop="156dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_tap" />
+                 />
 
         </androidx.core.widget.NestedScrollView>
 

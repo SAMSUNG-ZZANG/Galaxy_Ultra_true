@@ -13,5 +13,4 @@ class NavHostActivity : BaseActivity<ActivityNavHostBinding>(R.layout.activity_n
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 }

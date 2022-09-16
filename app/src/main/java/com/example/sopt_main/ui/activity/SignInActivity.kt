@@ -65,7 +65,5 @@ class SignInActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
             binding.ivSignInCheckbox.isSelected =!binding.ivSignInCheckbox.isSelected
             SOPTSharedPreferences.setAutoLogin(this, binding.ivSignInCheckbox.isSelected)
         }
-
     }
-
 }

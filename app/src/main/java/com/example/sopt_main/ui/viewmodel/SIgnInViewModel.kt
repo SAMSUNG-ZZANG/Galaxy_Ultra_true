@@ -20,7 +20,6 @@ class SignInViewModel @Inject constructor(
     private val _successLogin = MutableLiveData<Boolean?>()
     val successLogin = _successLogin
 
-
     fun signIn() {
         val requestSignIn = RequestSignIn(
             email = email.value ?: "",
